@@ -1,0 +1,117 @@
+@import "flags";
+
+@color-lightgray: #AAA;
+@color-black: #333;
+
+@dropdown-item-horizontal-spacing: 8px;
+@dropdown-item-veritcal-spacing: 8px;
+@dropdown-padding: 12px;
+@dropdown-arrow-size: 10px;
+
+@color-dropdown-background: #8DC1E2;
+@color-dropdown-background-light: lighten(@color-dropdown-background, 20%);
+@color-dropdown-background-hover: #F5F1D6;
+
+.localizationTool:hover {
+    cursor: pointer;
+    cursor: hand;
+}
+
+.localizationTool.ltool-is-visible {
+    ul {
+        display: block;
+        float: left;
+        position: absolute;
+        width: 100%;
+    }
+    .ltool-dropdown-label:after {
+        /* the arrow */
+        content: '';
+        display: block;
+        width: 0;
+        border-top: @dropdown-arrow-size solid transparent;
+        border-left: @dropdown-arrow-size solid transparent;
+        border-bottom: @dropdown-arrow-size solid @color-dropdown-background-light;
+        border-right: @dropdown-arrow-size solid transparent;
+        position: absolute;
+        right: @dropdown-item-horizontal-spacing;
+        top: @dropdown-padding - @dropdown-arrow-size / 2;
+    }
+}
+.localizationTool {
+    color: @color-black;
+    background: @color-dropdown-background;
+    position: relative;
+
+    .ltool-dropdown-label {
+        display: block;
+        padding: @dropdown-padding 0 @dropdown-padding @dropdown-padding;
+        color: #FFF;
+        border: 0;
+
+        img, .ltool-language-flag {
+            margin-left: 0;
+        }
+
+        .ltool-language-name {
+            color: @color-dropdown-background-light;
+        }
+    }
+    .ltool-dropdown-label:after {
+        /* the arrow */
+        content: '';
+        display: block;
+        width: 0;
+        border-top: @dropdown-arrow-size solid @color-dropdown-background-light;
+        border-left: @dropdown-arrow-size solid transparent;
+        border-bottom: @dropdown-arrow-size solid transparent;
+        border-right: @dropdown-arrow-size solid transparent;
+        position: absolute;
+        right: @dropdown-item-horizontal-spacing;
+        top: @dropdown-padding + @dropdown-arrow-size / 2;
+    }
+
+    img,div {
+        display: inline;
+    }
+
+    li {
+        display: block;
+        background: @color-dropdown-background-light;
+        padding: 5px;
+    }
+
+    li:hover {
+        background: @color-dropdown-background-hover;
+    }
+
+    img {
+        width: 16px;
+        height: 11px;
+    }
+    
+    .ltool-language-name {
+        color: @color-dropdown-background;
+    }
+    .ltool-language-name:before { content: '('; }
+    .ltool-language-name:after { content: ')'; }
+
+    .ltool-language-flag {
+        display: block;
+        float: left;
+        margin-top: 3px;
+    }
+
+    .ltool-language-flag,
+    .ltool-language-country,
+    .ltool-language-name {
+        margin-left: @dropdown-item-horizontal-spacing;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        display: none;
+    }
+
+}

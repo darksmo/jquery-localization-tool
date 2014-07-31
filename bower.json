@@ -1,0 +1,33 @@
+{
+  "name": "localizationTool",
+  "version": "0.0.1",
+  "main": [
+    "./dist/jquery.localizationTool.js"
+  ],
+  "ignore": [
+    ".jshintrc",
+    ".gitignore",
+    "**/*.txt",
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "latest"
+  },
+  "homepage": "http://darksmo.github.io/jquery-localization-tool/",
+  "authors": [
+    "Savio Dimatteo <darksmo@gmail.com>"
+  ],
+  "description": "jQuery Localization Tool",
+  "keywords": [
+    "ui",
+    "translation",
+    "localization",
+    "control",
+    "widget"
+  ],
+  "license": "MIT"
+}

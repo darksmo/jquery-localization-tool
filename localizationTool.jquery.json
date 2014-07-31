@@ -1,0 +1,36 @@
+{
+  "name": "localizationTool",
+  "title": "Localization Tool",
+  "description": "Simple localization tool for your website. Translates strings in the languages you provide.",
+  "version": "0.0.1",
+  "homepage": "http://darksmo.github.io/jquery-localization-tool/",
+  "demo": "http://darksmo.github.io/jquery-localization-tool/",
+  "author": {
+    "name": "Savio Dimatteo",
+    "email": "darksmo@gmail.com",
+    "url": "http://www.savio.dimatteo.it"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/darksmo/jquery-localization-tool.git"
+  },
+  "bugs": "https://github.com/darksmo/jquery-localization-tool/issues",
+  "docs": "https://github.com/darksmo/jquery-localization-tool",
+  "download": "http://github.com/darksmo/jquery-localization-tool/zipball/master/dist",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://darksmo.github.io/jquery-localization-tool//blob/master/LICENCE"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">=1.6.4"
+  },
+  "keywords": [
+    "ui",
+    "translation",
+    "localization",
+    "control",
+    "widget"
+  ]
+}
