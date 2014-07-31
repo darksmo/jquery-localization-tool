@@ -1,0 +1,249 @@
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web);
+
+@font-face {
+    font-family: 'balkerregular';
+    src: url('../fonts/balker.eot');
+    src: url('../fonts/balker.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/balker.woff') format('woff'),
+         url('../fonts/balker.ttf') format('truetype'),
+         url('../fonts/balker.svg#balkerregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body,html {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+h1,h2,h3 {
+    font-family: 'balker', Sans-serif;
+}
+
+h1 {
+    color: white; 
+    text-indent: -9000px;
+    background-image: url('../images/logo.png');
+    background-repeat: no-repeat;
+    display: block;
+    width: 261px;
+    height: 145px;
+    margin-top: 0;
+    font-weight: 300;
+    font-size: 2em;
+}
+
+#widget {
+    z-index: 2;
+}
+
+h2 {
+    color: white;
+    margin: 3px 0 0 1em;
+    font-size: 2em;
+    font-weight: 300;
+}
+
+b {
+    color: #4C93D1;
+    font-weight: 300;
+}
+
+section {
+    font-size: 1.8em;
+}
+
+h3 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+    margin-top: 2em;
+}
+
+.hi {
+    color: #D14C7E;
+}
+
+a, a:visited {
+    color: #9879F6;
+}
+
+p {
+    margin-top: 2em;
+    font-size: 0.9em;
+    clear: both;
+}
+
+pre {
+    font-size: 0.8em;
+}
+
+.l-columns > * {
+    float: left;
+}
+.l-columns:last-child:after {
+    display: block;
+    visibility: hidden;
+    height: 0;
+    content: " ";
+    clear: both;
+}
+.l-centered {
+    width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.l-lang-html,.l-lang-javascript {
+    position: relative;
+}
+.l-lang-html:after {
+    font-family: 'balker', Sans-serif;
+    width: 6.5em;
+    text-align: center;
+    content: 'HTML';
+    position: absolute;
+    left:0;
+    top:0;
+    background: #333;
+    color: white;
+    padding: 0.8em;
+}
+.l-lang-javascript:after {
+    font-family: 'balker', Sans-serif;
+    width: 6.5em;
+    content: 'Javascript';
+    position: absolute;
+    left:0;
+    top:0;
+    background: #333;
+    color: white;
+    padding: 0.8em;
+    text-align: center;
+}
+
+.l-head-text {
+    width: 22%;
+    margin-right: 1%;
+    text-align: center;
+    font-size: 0.7em;
+}
+.l-head-text div:first-child{
+    background: #333;
+    color: white;
+    margin: 0;
+    padding: 1em 0 0 0 ;
+    height: 2em;
+    font-family: 'balker', Sans-serif;
+}
+.l-head-text div:last-child{
+    padding: 0;
+    margin: 1em 0 0 0;
+    text-align: center;
+}
+
+.label-parent {
+    position: relative;
+}
+.label {
+    position: absolute;
+    padding: 0.05em;
+    margin: 0.05em;
+    color: #333;
+    border-bottom: 1px solid #333;
+    display: block;
+    font-size: 0.6em;
+    right: 4em;
+    width: auto;
+    line-height: 0.4em;
+}
+
+#hello {
+    font-size: 2em;
+    position: absolute;
+    top: 1em;
+    left: 9.5em; /* context: 2em */
+    background: white;
+    padding: 0.7em;
+
+}
+#hello:after {
+    display: block;
+    height: 0;
+    width: 0;
+    position: absolute;
+    content: "";
+    border-top: 0.5em solid transparent;
+    border-right: 0.5em solid white;
+    border-left: 0.5em solid transparent;
+    border-bottom: 0.5em solid transparent;
+    left: -0.9em;
+    top: 0.5em;
+}
+
+#widget {
+    display: block;
+    width: 261px;
+}
+
+
+header {
+    background: url('../images/flags-bw.png') rgba(10,10,10,0.5);
+    padding: 2em 0;
+}
+
+ul.listOfLanguages {
+    list-style: none;
+    font-size: 0.8em;
+    margin-left: 0;
+    padding-left: 0;
+}
+.listOfLanguages li {
+    margin-top: 1em;
+    clear: both;
+    margin-left: 0;
+    padding-left: 0;
+}
+.flag {
+    float: left; 
+    margin: 0.4em;
+}
+
+.light {
+    color: #8DC1E2;
+    float: right;
+}
+
+a.btn {
+    font-size: 0.7em;
+    display: block;
+    color: white;
+    background : #4C93D1;
+    text-decoration: none;
+    padding: 1em;
+    text-align: center;
+    margin-top: 1em;
+    margin-right: 0.5em;
+
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+
+    /* drop shadow */
+    position: relative;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.25), 0 0 50px rgba(0,0,0,0.1) inset;
+    border-radius: 1%     1%     1%     1% /     1%     1%     1%     1%;
+}
+.btn:hover {
+    background: #92BDE2;
+}
+
+ol {
+    font-size: 0.9em;
+}
+
+#disqus_thread {
+    margin-top: 3em;
+}

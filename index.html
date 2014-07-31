@@ -2,24 +2,247 @@
 <html>
     <head lang="en">
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
-        <meta name="description" content="
-        query.localizationTool.js - Easy localization of your single-page websites. Translate in multiple languages with no changes to your markup.">
+        <meta name="description" content="jquery.localizationTool.js - Easy localization of your single-page websites. Translate in multiple languages with no changes to your markup.">
         <meta name="keywords" content="jquery plugin, ui, localization, languages, translate, easy, simple, one-page">
         <title>Easy translation of your one-page website via jQuery</title>
-        <link type="text/css" rel="stylesheet" href="styles/style.css">
+        <link type="text/css" rel="stylesheet" href="styles/style.css" />
+        <link type="text/css" rel="stylesheet" href="http://cdn.rawgit.com/darksmo/jquery-localization-tool/master/dist/jquery.localizationTool.min.css" />
         <!--[if lt IE 9]>
             <link type="text/css" rel="stylesheet" href="styles/style-ie-lte8.css">
             <script src="js/html5shiv.js"></script>
         <![endif]-->
     </head>
     <body>
-        <h1>jquery.localizationTool.js</h1>
-        <h2>Simple localization dropdown for your website. Translates strings in the languages you provide. This widget is built with the single page scenario in mind. It supports right-to-left text direction when languages like Arabic are selected.</h2>
-        <h3>Meanwhile you can visit:</h3>
-        <ul>
-            <li><a href="http://www.savio.dimatteo.it">The author website</a></li>
-            <li><a href="http://github.com/darksmo/jquery-localization-tool">The github repository of this project</a></li>
-        </ul>
+        <header>
+            <div class="l-centered">
+                <h1>jquery.localizationTool.js</h1>
+                <div id="hello">Hello!</div>
+                <div class="l-columns">
+                    <div class="localizationTool" id="widget"></div>
+                    <h2>Easy localization for one-page websites</h2>
+                </div>
+            </div>
+        </header>
+        <div class="l-centered">
+            <section>
+                <h3>Fully Featured</h3>
+                <p>
+                Tested, Compatible with IE7+, Mobile Devices, Desktops and Maintained with <span style="color: red;">&#x2764;</span>.
+                </p>
+            </section>
+            <section>
+                <h3>Dead Easy</h3>
+                <p>Say you had to translate this:</p>
+                <pre class="l-lang-html">
+                   &lt;div id="hello"&gt;Hello&lt;/div&gt;
+                </pre>
+                <p>Step 1: place the widget wherever you like.</p>
+                <pre class="l-lang-html">
+                   &lt;div id="widget"&gt;&lt;/div&gt;
+                </pre>
+                <p>Step 2: translate.</p>
+                <pre class="l-lang-javascript label-parent">
+                   $("#widget").localizationTool({
+                       strings: {
+                           "id:hello" : { 
+                               it_IT : "Ciao",
+                               de_DE : "Hallo",
+                               fr_FR : "Salut"
+                           }
+                       }
+                   });<!--
+                --><a href="#"><!--
+                --><div class="label" style="top: 4em;">
+                            point to <span class="hi">source string</span>
+                </div><!--
+                --><div class="label" style="top: 6em;">
+                          translate!
+                </div><!--
+                --><div class="label" style="top: 8em;">
+                          translate!
+                </div><!--
+                --><div class="label" style="top: 10em;">
+                          translate!
+                </div>
+                </a>
+                </pre>
+            </section>
+            <section>
+                <h3>Flexible</h3>
+                <p>Many ways to point to <span class="hi">source strings</span>:</p>
+                <div class="l-columns">
+                    <div class="l-head-text">
+                        <div>by ID</div>
+                        <div>
+                            id:hello
+                        </div>
+                    </div>
+                    <div class="l-head-text">
+                        <div>by CLASS</div>
+                        <div>
+                            class:hello
+                        </div>
+                    </div>
+                    <div class="l-head-text">
+                        <div>by ELEMENT NAME</div>
+                        <div>
+                            element:h2
+                        </div>
+                    </div>
+                    <div class="l-head-text">
+                        <div>by wathever TEXT</div>
+                        <div>
+                            Hello!
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h3>Customizable</h3>
+                <p>Define your own languages!</p>
+                <pre class="l-lang-javascript">
+                    $('#widget').localizationTool({
+                     languages: {
+                         <b>
+                         'myDialect' : {
+                            language: 'Dialect',
+                            country: 'Barletta',
+                            languageTranslated: "Barlett'n",
+                            countryTranslated: "Barli'tt",
+                            flag: {
+                                'url' : 'http://www.example.org/barlettaFlag.png'
+                            }
+                         }
+                         </b>
+                     },
+                     strings: {
+                         'id:hello' : {
+                             it_IT : 'Ciao',
+                             de_DE : 'Hallo',
+                             fr_FR : 'Salut',
+                             <b>myDialect : 'Wann&aacute;!'</b>
+                         }
+                     }
+                    });
+                </pre>
+            </section>
+            <section>
+                <h3>Ambitious</h3>
+                <p>
+                   This is the list of the currently supported languages/countries. 
+                </p>
+                <ul class="listOfLanguages">
+                </ul>
+                <p>
+                    If you can't find your favourite language here, feel free to <a href="https://github.com/darksmo/jquery-localization-tool/issues/new">request it</a>.
+                </p>
+                <p>
+                    It would be great if you could contribute by indicating the followings:
+                </p>
+                <ol>
+                    <li>language code - pick from <a href="https://www.gnu.org/software/gettext/manual/html_node/Usual-Language-Codes.html#Usual-Language-Codes">this list</a></li>
+                    <li>country code - pick from <a href="https://www.gnu.org/software/gettext/manual/html_node/Country-Codes.html#Country-Codes">this list</a></li>
+                    <li>language name in English</li>
+                    <li>country name in English</li>
+                    <li>translated language name</li>
+                    <li>translated country name</li>
+                </ol>
+            </section>
+            <section>
+                <h3>Still not Convinced?</h3>
+                <p>If you think something is missing, don't be shy, <a href="https://github.com/darksmo/jquery-localizati">suggest a feature!</a></p>
+            </section>
+            <section>
+                <h3>Go Get IT!</h3>
+                <p>
+                    Start translating your one page website now.
+                </p>
+                <div class="l-columns">
+                    <a href="https://github.com/darksmo/jquery-localization-tool/blob/master/demo/index.html" class="btn">Quick Start Guide</a>
+                    <a href="http://github.com/darksmo/jquery-localization-tool/zipball/master/" class="btn">Download (.zip)</a>
+                    <a href="http://github.com/darksmo/jquery-localization-tool" class="btn">View on GitHub</a>
+                </div>
+                <div>
+                <br />
+                <br />
+                <p>
+                JsDocs can be found in the &quot;docs/&quot; directory of the <a href="http://github.com/darksmo/jquery-localization-tool/docs">the repository</a>.
+                </p>
+                </div>
+            </section>
+            <!--[if (!IE)|(gt IE 7)]>
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                
+                /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                var disqus_shortname = 'jquery-localization-tool'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            <![endif]-->
+
+        </div>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" language="javascript" src="http://cdn.rawgit.com/darksmo/jquery-localization-tool/master/dist/jquery.localizationTool.min.js"></script>
+        <script>
+            $('#widget').localizationTool({
+                strings: {
+                    'id:hello': {
+                        de_DE: 'Hallo',
+                        es_ES: 'Hola',
+                        fr_FR: 'Salut',
+                        br_PT: 'Olá',
+                        en_AU: 'Hello',
+                        it_IT: 'Ciao',
+                        jp_JP: '今日は',
+                        ar_TN: 'هتاف للترحيب'
+                    }
+                }
+            });
+            (function () {
+                var key;
+                var languagesObj = $('#widget').data('settings').languages;
+                for (key in languagesObj) {
+                   if (languagesObj.hasOwnProperty(key)) {
+                       var direction = 'ltr';
+                       if (languagesObj[key].hasOwnProperty('cssDirection')) {
+                           direction = languagesObj[key].cssDirection;
+                       }
+                       $('.listOfLanguages').append([
+                           '<li><div class="',
+                           languagesObj[key].flag['class'],'"></div>',
+                           '<div>',
+                           key,
+                           ' - ',
+                           languagesObj[key].country,
+                           ' (', languagesObj[key].language, ') ',
+                           '<div style="direction:',direction, ';" class="light">',
+                           languagesObj[key].countryTranslated,
+                           ' (', languagesObj[key].languageTranslated, ') ',
+                           '</div>'
+                       ].join(''));
+                   }
+                }
+            })();
+        </script>
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-49743862-4', 'auto');
+          ga('send', 'pageview');
+
+        </script>
     </body>
 </html>
