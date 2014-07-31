@@ -26,7 +26,7 @@
         '<h1 id="mainHeading">Hello World!</h1>',
         '<h2 id="secondaryHeading">This is a fixture</h2>',
         '<p id="paragraph">This is a paragraph</p>'
-    ],
+    ].join(''),
 
   };
 
