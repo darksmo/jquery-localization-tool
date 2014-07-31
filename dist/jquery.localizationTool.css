@@ -765,13 +765,15 @@
   float: left;
   position: absolute;
   width: 100%;
+  list-style-type: none;
 }
-.localizationTool.ltool-is-visible .ltool-dropdown-label:after {
+.localizationTool.ltool-is-visible .ltool-dropdown-label-arrow {
   /* the arrow */
 
   content: '';
   display: block;
   width: 0;
+  height: 0;
   border-top: 10px solid transparent;
   border-left: 10px solid transparent;
   border-bottom: 10px solid #deedf7;
@@ -790,6 +792,7 @@
   padding: 12px 0 12px 12px;
   color: #FFF;
   border: 0;
+  position: relative;
 }
 .localizationTool .ltool-dropdown-label img,
 .localizationTool .ltool-dropdown-label .ltool-language-flag {
@@ -798,12 +801,13 @@
 .localizationTool .ltool-dropdown-label .ltool-language-name {
   color: #deedf7;
 }
-.localizationTool .ltool-dropdown-label:after {
+.localizationTool .ltool-dropdown-label-arrow {
   /* the arrow */
 
   content: '';
   display: block;
   width: 0;
+  height: 0;
   border-top: 10px solid #deedf7;
   border-left: 10px solid transparent;
   border-bottom: 10px solid transparent;

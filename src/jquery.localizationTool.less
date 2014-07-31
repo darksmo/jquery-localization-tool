@@ -23,12 +23,14 @@
         float: left;
         position: absolute;
         width: 100%;
+        list-style-type: none;
     }
-    .ltool-dropdown-label:after {
+    .ltool-dropdown-label-arrow{
         /* the arrow */
         content: '';
         display: block;
         width: 0;
+        height: 0;
         border-top: @dropdown-arrow-size solid transparent;
         border-left: @dropdown-arrow-size solid transparent;
         border-bottom: @dropdown-arrow-size solid @color-dropdown-background-light;
@@ -56,12 +58,14 @@
         .ltool-language-name {
             color: @color-dropdown-background-light;
         }
+        position: relative;
     }
-    .ltool-dropdown-label:after {
+    .ltool-dropdown-label-arrow {
         /* the arrow */
         content: '';
         display: block;
         width: 0;
+        height: 0;
         border-top: @dropdown-arrow-size solid @color-dropdown-background-light;
         border-left: @dropdown-arrow-size solid transparent;
         border-bottom: @dropdown-arrow-size solid transparent;

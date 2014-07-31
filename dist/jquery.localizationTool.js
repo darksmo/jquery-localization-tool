@@ -69,7 +69,7 @@
             
             var markupArray = [];
 
-            markupArray.push('<span class="ltool-dropdown-label">Change Language</span>');
+            markupArray.push('<span class="ltool-dropdown-label">Change Language</span><div class="ltool-dropdown-label-arrow"></div>');
             markupArray.push('<ul class="ltool-dropdown-items">');
             var languageCode, i;
             for (i=0;languageCode=guaranteedLanguagesArray[i++];) {
