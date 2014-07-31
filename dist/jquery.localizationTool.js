@@ -1,4 +1,4 @@
-/*! Localization Tool - v0.0.1 - 2014-07-31
+/*! Localization Tool - v0.0.2 - 2014-07-31
 * http://darksmo.github.io/jquery-localization-tool/
 * Copyright (c) 2014; Licensed MIT */
 (function($) {
