@@ -46,7 +46,7 @@ $("#localizationToolbar").localizationTool('destroy');
 
 For live demos please visit the project webpage:
 
-[http://darksmo.github.io/jquery-localization-tool/](http://lokku.github.io/jquery-localization-tool/)
+[http://darksmo.github.io/jquery-localization-tool/](http://darksmo.github.io/jquery-localization-tool/)
 
 For a Quick Start have a look at the source html of the following file:
 
