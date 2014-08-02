@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>jQuery Localization Tool Supported Languages</title>
+        <link type="text/css" rel="stylesheet" href="/dist/jquery.localizationTool.css">
+
+        <style>
+            li {
+                list-style: none;
+                clear: left;
+            }
+            .light {
+                color: #008800;
+            }
+            li * {
+                margin-left: 1em;
+                display: block;
+                float: left;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>List of supported languages and flags</h1>
+        <p>
+            This page just shows an automatically-generated list of supported
+            languages/country/flags. It's really for testing out the flags
+            appear correctly before the code is committed.
+        </p>
+        <div id="widget" class="localizationTool"></div>
+
+        <ul class="listOfLanguages"></ul>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="/src/jquery.localizationTool.js"></script>
+
+        <script>
+            $('#widget').localizationTool();
+
+            var key;
+            var languagesObj = $('#widget').data('settings').languages;
+            for (key in languagesObj) {
+               if (languagesObj.hasOwnProperty(key)) {
+                   var direction = 'ltr';
+                   if (languagesObj[key].hasOwnProperty('cssDirection')) {
+                       direction = languagesObj[key].cssDirection;
+                   }
+                   $('.listOfLanguages').append([
+                       '<li><div class="',
+                       languagesObj[key].flag['class'],'"></div>',
+                       '<div>',
+                       key,
+                       ' - ',
+                       languagesObj[key].country,
+                       ' (', languagesObj[key].language, ') </div>',
+                       '<div style="direction:',direction, ';" class="light">',
+                       languagesObj[key].countryTranslated,
+                       ' (', languagesObj[key].languageTranslated, ') ',
+                       '</div></li>'
+                   ].join(''));
+               }
+            }
+
+        </script>
+    </body>
+</html>
