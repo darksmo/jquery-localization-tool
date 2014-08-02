@@ -647,7 +647,7 @@
                 'zh_CN': {
                     'country' : 'China',
                     'language' : 'Chinese',
-                    'countryTranslated': '瓷的',
+                    'countryTranslated': '中国',
                     'languageTranslated': '中文',
                     'flag' : {
                         'class' : 'flag flag-cn'
