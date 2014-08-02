@@ -16,7 +16,7 @@
         <header>
             <div class="l-centered">
                 <h1>jquery.localizationTool.js</h1>
-                <div id="hello">Hello!</div>
+                <div id="hello">今日は</div>
                 <div class="l-columns">
                     <div class="localizationTool" id="widget"></div>
                     <h2>Easy localization for one-page websites</h2>
@@ -38,7 +38,7 @@
                 </pre>
                 <p>Step 1: place the widget wherever you like.</p>
                 <pre class="l-lang-html">
-                   &lt;div id="widget"&gt;&lt;/div&gt;
+                   &lt;div id="widget" class="localizationTool"&gt;&lt;/div&gt;
                 </pre>
                 <p>Step 2: translate.</p>
                 <pre class="l-lang-javascript label-parent">
@@ -187,9 +187,10 @@
         </div>
 
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" language="javascript" src="http://cdn.rawgit.com/darksmo/jquery-localization-tool/master/dist/jquery.localizationTool.min.js"></script>
+        <script type="text/javascript" language="javascript" src="http://rawgit.com/darksmo/jquery-localization-tool/master/dist/jquery.localizationTool.min.js"></script>
         <script>
             $('#widget').localizationTool({
+                'defaultLanguage' : 'jp_JP',
                 strings: {
                     'id:hello': {
                         de_DE: 'Hallo',
@@ -198,7 +199,7 @@
                         br_PT: 'Olá',
                         en_AU: 'Hello',
                         it_IT: 'Ciao',
-                        jp_JP: '今日は',
+                        en_GB: 'Hello',
                         ar_TN: 'هتاف للترحيب'
                     }
                 }
