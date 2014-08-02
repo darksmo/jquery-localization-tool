@@ -589,6 +589,15 @@
                         'class' : 'flag flag-au'
                     }
                 },
+                'en_IN' : {
+                    'country' : 'India',
+                    'language' : 'English',
+                    'countryTranslated': 'India',
+                    'languageTranslated': 'Indian',
+                    'flag': {
+                        'class' : 'flag flag-in'
+                    }
+                },
                 'it_IT' : {
                     'country' : 'Italy',
                     'language': 'Italian',
@@ -616,7 +625,71 @@
                     'flag' : {
                         'class' : 'flag flag-tn'
                     }
+                },
+                'en_IE' : {
+                    'country': 'Ireland',
+                    'language': 'English',
+                    'countryTranslated': 'Ireland',
+                    'languageTranslated' : 'English',
+                    'flag' : {
+                        'class' : 'flag flag-ie'
+                    }
+                },
+                'nl_NL': {
+                    'country' : 'Netherlands',
+                    'language': 'Dutch',
+                    'countryTranslated' : 'Nederland',
+                    'languageTranslated' : 'Nederlands',
+                    'flag' : {
+                        'class' : 'flag flag-nl'
+                    }
+                },
+                'zh_CN': {
+                    'country' : 'China',
+                    'language' : 'Chinese',
+                    'countryTranslated': '瓷的',
+                    'languageTranslated': '中文',
+                    'flag' : {
+                        'class' : 'flag flag-cn'
+                    }
+                },
+                'fi_FI': {
+                    'country' : 'Finland',
+                    'language' : 'Finnish',
+                    'countryTranslated' : 'Suomi',
+                    'languageTranslated' : 'Suomi',
+                    'flag' : {
+                        'class' : 'flag flag-fi'
+                    }
+                },
+                'pt_PT' : {
+                    'country' : 'Portugal',
+                    'language' : 'Portuguese',
+                    'countryTranslated': 'Portugal',
+                    'languageTranslated' : 'Português',
+                    'flag' : {
+                        'class' : 'flag flag-pt'
+                    }
+                },
+                'pl_PL': {
+                    'country' : 'Poland',
+                    'language': 'Polish',
+                    'countryTranslated' : 'Polska',
+                    'languageTranslated': 'Polski',
+                    'flag' : {
+                        'class' : 'flag flag-pl'
+                    }
+                },
+                'ru-RU': {
+                    'country' : 'Russia',
+                    'language' : 'Russian',
+                    'languageTranslated': 'Русский',
+                    'countryTranslated' : 'Россия',
+                    'flag': {
+                        'class': 'flag flag-ru'
+                    }
                 }
+                
             };
 
             var settings = $.extend({
