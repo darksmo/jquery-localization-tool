@@ -247,3 +247,7 @@ ol {
 #disqus_thread {
     margin-top: 3em;
 }
+
+body .localizationTool .ltool-language-flag {
+    margin-top: 7px;
+}
