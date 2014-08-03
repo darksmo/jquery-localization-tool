@@ -5,6 +5,7 @@
  */
 
 (function($) {
+    var _keyboardPressed = false;
 
     var methods = {
         /**
@@ -299,17 +300,24 @@
             var $this = this;
 
             $this
+                .bind('mousedown.localizationTool', function (e) {
+                    _keyboardPressed = false;
+                    methods._onKeydown.call($this, e);
+                })
                 .bind('click.localizationTool', function (e) { 
                     methods._onDropdownClicked.call($this, e);
                 })
                 .bind('keydown.localizationTool', function (e){ 
+                    _keyboardPressed = true;
                     methods._onKeydown.call($this, e);
                 })
                 .bind('mouseout.localizationTool', function (e) { 
                     methods._onMouseout.call($this, e);
                 })
                 .bind('focusout.localizationTool', function () {
-                    methods._closeDropdown.call($this);
+                    if (_keyboardPressed) {
+                        methods._closeDropdown.call($this);
+                    }
                 });
 
             $this.find('.ltool-language')
