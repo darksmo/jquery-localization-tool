@@ -1,3 +1,7 @@
+v0.0.4 Sun Aug  3 16:38:30 CEST 2014
+    * fix 'China' translation in zh_CN
+    * add keyboard support
+
 v0.0.3 Sat Aug  2 13:45:15 CEST 2014
     * added more supported languages
 

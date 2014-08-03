@@ -825,6 +825,9 @@
   background: #deedf7;
   padding: 5px;
 }
+.localizationTool li.ltool-is-selected {
+  background: #f5f1d6;
+}
 .localizationTool li:hover {
   background: #f5f1d6;
 }
