@@ -271,15 +271,19 @@
             switch (e.keyCode) {
                 case 13: /* enter (open-close menu) */
                     methods._onDropdownClicked.call($this);
+                    e.preventDefault();
                     break;
                 case 40: /* down (select next) */
                     methods._selectNextLanguage.call($this);
+                    e.preventDefault();
                     break;
                 case 38: /* up (select previous) */
                     methods._selectPreviousLanguage.call($this);
+                    e.preventDefault();
                     break;
                 case 27:
                     methods._closeDropdown.call($this);
+                    e.preventDefault();
                     break;
             }
 
