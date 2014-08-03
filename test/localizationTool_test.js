@@ -510,7 +510,7 @@
             }
         );
 
-    deepEqual(commonLanguages, ['en_GB', 'es_ES']);
+    deepEqual(commonLanguages, ['es_ES', 'en_GB']);
   });
 
   test('no language in common', function () {
@@ -562,7 +562,8 @@
             }
         );
 
-    deepEqual(commonLanguages, ['en_GB', 'it_IT', 'jp_JP', 'fr_FR']);
+    deepEqual(commonLanguages, [ "fr_FR", "it_IT", "jp_JP", "en_GB" ]);
+
   });
 
   test('no strings defined', function () {
@@ -571,6 +572,99 @@
         .localizationTool('_findSubsetOfUsedLanguages', {});
 
     deepEqual(commonLanguages, ['en_GB']);
+  });
+
+  module('_languageCodeToOrdinal', { setup: function () {
+    addDropdownWidgetFunc();
+  }});
+  test('converts language codes to ordinal numbers', function () {
+    var $dropdown = $('#dropdown').localizationTool({
+        strings: {
+            'string1' : {
+               'it_IT' : 'translation1',
+               'jp_JP' : 'translation2',
+               'fr_FR' : 'translation3',
+            },
+            'string2' : {
+               'it_IT' : 'translation1',
+               'jp_JP' : 'translation2',
+               'fr_FR' : 'translation3',
+            },
+            'string3' : {
+               'it_IT' : 'translation1',
+               'jp_JP' : 'translation2',
+               'fr_FR' : 'translation3',
+            }
+        }
+    });
+
+    equal($dropdown.localizationTool('_languageCodeToOrdinal', 'it_IT'),
+        1, 'got expected ordinal number for it_IT'
+    );
+    equal($dropdown.localizationTool('_languageCodeToOrdinal', 'jp_JP'),
+        2, 'got expected ordinal number for jp_JP'
+    );
+    equal($dropdown.localizationTool('_languageCodeToOrdinal', 'fr_FR'),
+        0, 'got expected ordinal number for fr_FR'
+    );
+    equal($dropdown.localizationTool('_languageCodeToOrdinal', 'en_GB'),
+        3, 'default language'
+    );
+
+    throws(function () {
+        $dropdown.localizationTool('_languageCodeToOrdinal', 'fooFie!');
+    });
+  });
+
+  module('_ordinalToLanguageCode', { setup: function () {
+    addDropdownWidgetFunc();
+  }});
+  test('converts language codes to ordinal numbers', function () {
+    var $dropdown = $('#dropdown').localizationTool({
+        strings: {
+            'string1' : {
+               'it_IT' : 'translation1',
+               'jp_JP' : 'translation2',
+               'fr_FR' : 'translation3',
+            },
+            'string2' : {
+               'it_IT' : 'translation1',
+               'jp_JP' : 'translation2',
+               'fr_FR' : 'translation3',
+            },
+            'string3' : {
+               'it_IT' : 'translation1',
+               'jp_JP' : 'translation2',
+               'fr_FR' : 'translation3',
+            }
+        }
+    });
+
+    equal($dropdown.localizationTool('_ordinalToLanguageCode', 1),
+        'it_IT', 'got expected language code number for ordinal 1'
+    );
+    equal($dropdown.localizationTool('_ordinalToLanguageCode', 2),
+        'jp_JP', 'got expected language code number for ordinal 2'
+    );
+    equal($dropdown.localizationTool('_ordinalToLanguageCode', 0),
+        'fr_FR', 'got expected language code number for ordinal 0'
+    );
+    equal($dropdown.localizationTool('_ordinalToLanguageCode', 3),
+        'en_GB', 'got expected language code number for ordinal 3'
+    );
+
+    // NOTE: string input
+    equal($dropdown.localizationTool('_ordinalToLanguageCode', "2"),
+        'jp_JP', 'got expected language code number for ordinal 2'
+    );
+
+    throws(function () {
+        $dropdown.localizationTool('_ordinalToLanguageCode', 4);
+    }, 'out of right bound of array');
+
+    throws(function () {
+        $dropdown.localizationTool('_ordinalToLanguageCode', -1);
+    }, 'out of left bound of array');
   });
 
 }(jQuery));

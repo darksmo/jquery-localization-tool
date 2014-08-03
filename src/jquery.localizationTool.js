@@ -8,6 +8,55 @@
 
     var methods = {
         /**
+         * Returns the ordinal number corresponding to the given language code,
+         * or throws in case the given language code is not defined.
+         * NOTE: this method operates on the active languages, therefore
+         * $this.data('activeLanguageCodeArray') must be available when the
+         * method is called.
+         *
+         * @name _languageCodeToOrdinal
+         * @function
+         * @access private
+         * @param {string} lanuageCode - the language code to convert to ordinal
+         * @returns {number} ordinal - the converted ordinal
+         */
+        '_languageCodeToOrdinal' : function (languageCode) {
+            var $this = this,
+                activeLanguageCodes = $this.data('activeLanguageCodeArray');
+
+            var ordinal = activeLanguageCodes.indexOf(languageCode);
+
+            if (ordinal === -1) {
+                $.error('Cannot convert ' + languageCode + ' into an ordinal number');
+            }
+
+            return ordinal;
+        },
+        /**
+         * Returns the language code corresponding to the given ordinal number.
+         * It throws in case the given ordinal number does not correspond to any
+         * language code.
+         * NOTE: this method operates on the active languages, therefore
+         * $this.data('activeLanguageCodeArray') must be available when the
+         * method is called.
+         *
+         * @name _ordinalToLanguageCode
+         * @function
+         * @access private
+         * @param {number} ordinal - the ordinal number to convert into a language code
+         * @returns {string} languageCode - the converted language code
+         */
+        '_ordinalToLanguageCode' : function (ordinal) {
+            var $this = this,
+                activeLanguageCodes = $this.data('activeLanguageCodeArray');
+
+            if (activeLanguageCodes.length <= ordinal || ordinal < 0) {
+                $.error('Cannot convert ' + ordinal + ' into a language code.');
+            }
+
+            return activeLanguageCodes[ordinal];
+        },
+        /**
          * Returns the html representation for the given language code.
          * @name _languageCodeToHtml
          * @function
@@ -53,29 +102,28 @@
             $this.find('.ltool-dropdown-label').html(
                 $('.ltool-language.' + languageCode).html()
             );
+
+            $this.data('selectedLanguageCode', languageCode);
         },
         /**
          * Initializes the localization tool widget.
          * @name _initializeWidget
          * @function
          * @access private
+         * @param {array} languageCodeArray - the language code array of the languages to be displayed
          */
-        '_initializeWidget': function () {
+        '_initializeWidget': function (languageCodeArray) {
 
             var $this = this,
                 settings = $this.data('settings'),
-                guaranteedLanguagesArray = methods._findSubsetOfUsedLanguages.call(
-                    $this,
-                    settings.strings
-                ),
                 languagesObj = settings.languages;
             
             var markupArray = [];
 
-            markupArray.push('<span class="ltool-dropdown-label">Change Language</span><div class="ltool-dropdown-label-arrow"></div>');
+            markupArray.push('<span tabindex="0" class="ltool-dropdown-label">Change Language</span><div class="ltool-dropdown-label-arrow"></div>');
             markupArray.push('<ul class="ltool-dropdown-items">');
             var languageCode, i;
-            for (i=0;languageCode=guaranteedLanguagesArray[i++];) {
+            for (i=0;languageCode=languageCodeArray[i++];) {
 
                 if ( languagesObj.hasOwnProperty(languageCode)) {
                     markupArray.push(
@@ -101,10 +149,22 @@
         '_onDropdownClicked' : function (/*e*/) {
             var $this = this;
 
+            var selectedLanguageCode = $this.data('selectedLanguageCode');
+
+            $this.find('.ltool-language').removeClass('ltool-is-selected');
+            $this.find('.' + selectedLanguageCode).addClass('ltool-is-selected');
+
             $this.toggleClass('ltool-is-visible');
+
+            return $this;
+        },
+        '_closeDropdown' : function () {
+            var $this = this;
+
+            $this.removeClass('ltool-is-visible');
         },
         /**
-         * Handles mouseout on dropdown items
+         * Handles mouseout on dropdown items.
          * @name _onMouseout
          * @function
          * @access private
@@ -113,10 +173,16 @@
             var $this = this;
 
             if ($this.find(e.relatedTarget).length > 0) {
+                // get rid of the current selected item!
+                $this.find('.ltool-is-selected')
+                    .removeClass('ltool-is-selected');
+
+                // we will be over an element of ours
                 e.preventDefault();
                 return $this;
             }
 
+            /* We will be over another element that doesn't belong to us */
             $this.removeClass('ltool-is-visible');
         },
         /**
@@ -129,13 +195,95 @@
         '_onLanguageSelected': function ($item) {
             var $this = this;
 
+            // extract language code from the $item
             var languageCode = $item.attr('class')
                 .replace('ltool-language', '')
-                .replace(' ', '');
+                .replace('ltool-is-selected', '')
+                .replace(/ /g, '');
 
             methods._selectLanguage.call($this, languageCode);
 
             methods.translate.call($this, languageCode);
+        },
+        /**
+         * Select the language before the current language in the list.
+         * @name _selectPreviousLanguage
+         * @function
+         * @access private
+         */
+        '_selectPreviousLanguage' : function () {
+            var $this = this;
+
+            var currentLanguageCode = $this.data('selectedLanguageCode');
+            var currentLanguageCodeOrdinal = methods._languageCodeToOrdinal.call($this, currentLanguageCode);
+
+            if (currentLanguageCodeOrdinal === 0) {
+                return;  // cannot go before the first language
+            }
+
+            var nextLanguageCode = methods._ordinalToLanguageCode.call($this, currentLanguageCodeOrdinal-1);
+
+            // peform the selection
+            $this.find('.ltool-is-selected').removeClass('ltool-is-selected');
+            methods._selectLanguage.call($this, nextLanguageCode);
+            methods.translate.call($this, nextLanguageCode);
+            $this.find('.' + nextLanguageCode).addClass('ltool-is-selected');
+
+            return $this;
+        },
+        /**
+         * Select the language after the current language in the list.
+         * @name _selectPreviousLanguage
+         * @function
+         * @access private
+         */
+        '_selectNextLanguage' : function () {
+            var $this = this,
+                activeLanguageCodes = $this.data('activeLanguageCodeArray');
+
+            var currentLanguageCode = $this.data('selectedLanguageCode');
+            var currentLanguageCodeOrdinal = methods._languageCodeToOrdinal.call($this, currentLanguageCode);
+
+            if (currentLanguageCodeOrdinal + 1 >= activeLanguageCodes.length) {
+                return;
+            }
+
+            var nextLanguageCode = methods._ordinalToLanguageCode.call($this, currentLanguageCodeOrdinal+1);
+
+            // peform the selection
+            $this.find('.ltool-is-selected').removeClass('ltool-is-selected');
+            methods._selectLanguage.call($this, nextLanguageCode);
+            methods.translate.call($this, nextLanguageCode);
+            $this.find('.' + nextLanguageCode).addClass('ltool-is-selected');
+
+            return $this;
+        },
+        /**
+         * Handles keydown event
+         * @name _onKeydown
+         * @function
+         * @param {event} e - the keydown event
+         * @access private
+         */
+        '_onKeydown': function (e) {
+            var $this = this;
+
+            switch (e.keyCode) {
+                case 13: /* enter (open-close menu) */
+                    methods._onDropdownClicked.call($this);
+                    break;
+                case 40: /* down (select next) */
+                    methods._selectNextLanguage.call($this);
+                    break;
+                case 38: /* up (select previous) */
+                    methods._selectPreviousLanguage.call($this);
+                    break;
+                case 27:
+                    methods._closeDropdown.call($this);
+                    break;
+            }
+
+            return $this;
         },
         /**
          * Binds events to the localization tool widget.
@@ -146,18 +294,25 @@
         '_bindEvents': function () {
             var $this = this;
 
-            $this.bind('click.localizationTool', function (e) { 
-                methods._onDropdownClicked.call($this, e);
-            });
+            $this
+                .bind('click.localizationTool', function (e) { 
+                    methods._onDropdownClicked.call($this, e);
+                })
+                .bind('keydown.localizationTool', function (e){ 
+                    methods._onKeydown.call($this, e);
+                })
+                .bind('mouseout.localizationTool', function (e) { 
+                    methods._onMouseout.call($this, e);
+                })
+                .bind('focusout.localizationTool', function () {
+                    methods._closeDropdown.call($this);
+                });
+
             $this.find('.ltool-language')
                 .bind('click.localizationTool', function (/*e*/) {
                     methods._onLanguageSelected.call($this, $(this));
                 });
 
-            $this
-                .bind('mouseout.localizationTool', function (e) { 
-                    methods._onMouseout.call($this, e);
-                });
 
             return $this;
         },
@@ -383,6 +538,17 @@
            return $this;
         },
         /**
+         * Returns the code of the language currently selected
+         * @name getSelectedLanguageCode
+         * @function
+         * @access public
+         * @returns {string} [languageCode] - the language code currently selected
+         */
+        'getSelectedLanguageCode' : function () {
+            var $this = this;
+            return $this.data('selectedLanguageCode');
+        },
+        /**
          * Translates the current page.
          * @name translate
          * @function
@@ -472,17 +638,18 @@
         /**
          * Goes through each string defined and extracts the common subset of
          * languages that actually used. The default language is added to this
-         * subset a priori
+         * subset a priori. The resulting list is sorted by country name.
          *
          * @name _findSubsetOfUsedLanguages
          * @function
          * @access private
-         * @param {object} stringsObj
-         * @returns {array} usedLanguageCodes
+         * @param {object} stringsObj - the strings to translate
+         * @returns {array} usedLanguageCodes - an array of country codes sorted based on country names.
          */
         '_findSubsetOfUsedLanguages' : function (stringsObj) {
             var $this = this;
             var string;
+            var settings = $this.data('settings');
 
             // build an histogram of all the used languages in strings
             var usedLanguagesHistogram = {};
@@ -521,7 +688,14 @@
             }
 
             // add the default language
-            guaranteedLanguages.unshift($this.data('settings').defaultLanguage);
+            guaranteedLanguages.unshift(settings.defaultLanguage);
+
+            // now sort by country name
+            guaranteedLanguages.sort(function (a, b) {
+                return settings.languages[a].country.localeCompare(
+                    settings.languages[b].country
+                );
+            });
 
             return guaranteedLanguages;
         },
@@ -737,9 +911,18 @@
 
                 $this.data('settings', settings);
 
-                methods._initializeWidget.call($this);
+                // language codes common to all translations
+                var activeLanguageCodeArray = methods._findSubsetOfUsedLanguages.call(
+                    $this, settings.strings
+                );
+                $this.data('activeLanguageCodeArray', activeLanguageCodeArray);
+
+                methods._initializeWidget.call($this, activeLanguageCodeArray);
+
                 methods._selectLanguage.call($this, settings.defaultLanguage);
+
                 methods._bindEvents.call($this);
+
                 methods._buildStringReferenceMapping.call($this);
             });
         }
