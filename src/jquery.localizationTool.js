@@ -215,7 +215,8 @@
          * @access private
          */
         '_onLanguageSelected': function ($item) {
-            var $this = this;
+            var $this = this,
+                settings = $this.data('settings');
 
             // extract language code from the $item
             var languageCode = $item.attr('class')
@@ -225,7 +226,13 @@
 
             methods._selectLanguage.call($this, languageCode);
 
-            methods.translate.call($this, languageCode);
+            // Execute the callback specified by the user.
+            // If it returns false, do not translate. Note, any other
+            // value returned triggers translation.
+            //
+            if (false !== settings.onLanguageSelected(languageCode)) {
+                methods.translate.call($this, languageCode);
+            }
         },
         /**
          * Select the language before the current language in the list.
@@ -942,7 +949,17 @@
                  * TRANSLATION: <string>
                  *
                  */
-                'strings' : {}
+                'strings' : {},
+                /*
+                 * A callback called whenever the user selects the language
+                 * from the dropdown menu. If false is returned, the
+                 * translation will not be performed (but just the language
+                 * will be selected from the widget).
+                 *
+                 * The countryLanguageCode is a string representing the
+                 * selected language identifier like 'en_GB'
+                 */
+                'onLanguageSelected' : function (/*countryLanguageCode*/) { return true; }
             }, options);
 
             // add more languages

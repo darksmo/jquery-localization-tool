@@ -228,6 +228,42 @@
     );
   });
 
+  module('translate', { setup: function () {
+    addDropdownWidgetFunc();
+  }});
+
+  test('language selected callback is called after selection', function () {
+
+    $('#qunit-fixture').append([
+        '<div id="title">hello</div>',
+        '<div id="subtitle">world</div>'
+    ].join(''));
+
+    var gotCalledWith;
+
+    $('#dropdown').localizationTool({
+        'onLanguageSelected' : function (countryCode) {
+            gotCalledWith = countryCode;
+            return false;
+        },
+        'strings' : {
+            'id:title' : {
+                'en_GB': 'hello',
+                'it_IT': 'ciao'
+            },
+            'id:subtitle': {
+                'en_GB': 'world',
+                'it_IT': 'mondo'
+            }
+        }
+    });
+
+    $('#dropdown').localizationTool('_onLanguageSelected', $('<li class="en_GB"></li>'));
+
+    equal(gotCalledWith, 'en_GB', 'got called');
+    
+  });
+
 
   module('translate', { setup: function () {
     addDropdownWidgetFunc();
