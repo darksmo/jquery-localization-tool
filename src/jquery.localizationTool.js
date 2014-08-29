@@ -446,9 +446,10 @@
                    var stringName = string.substring(prefix.length);
 
                    // keeps the text of the first dom node in the loop below
-                   var domNodeText = undefined;  // note: assigns undefined
+                   var domNodeText;
                    var domNodesArray = [];
                    var allNodeTextsAreEqual = true;
+                   domNodeText = undefined;  // note: assigns undefined
 
                    
                    var k=0, node; 

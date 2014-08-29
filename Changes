@@ -1,3 +1,7 @@
+v0.0.7 Fri Aug 29 17:25:15 CEST 2014
+    * fix bug: throw exception on more than two "class:" strings defined
+    * allow to show/hide the flag, the country name and the language name
+
 v0.0.6 Sun Aug  3 17:20:51 CEST 2014
     * fix bug related to mouse/keyboard support
 
