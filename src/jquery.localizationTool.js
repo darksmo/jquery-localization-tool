@@ -722,7 +722,14 @@
                 }
             }
 
-            // add the default language
+            // delete the default language if it's in the guaranteed languages
+            var defaultIdx = guaranteedLanguages.indexOf(settings.defaultLanguage);
+            if (defaultIdx > -1) {
+                // delete the default language from the array
+                guaranteedLanguages.splice(defaultIdx, 1);
+            }
+
+            // add the default language in front
             guaranteedLanguages.unshift(settings.defaultLanguage);
 
             // now sort by country name

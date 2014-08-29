@@ -199,6 +199,35 @@
     );
   });
 
+  test('default language appears once', function () {
+
+    $('#qunit-fixture').append([
+        '<div id="title">hello</div>',
+        '<div id="subtitle">world</div>'
+    ].join(''));
+
+    // causes reference mapping to be run
+    $('#dropdown').localizationTool({
+        'defaultLanguage' : 'it_IT',
+        'strings' : {
+            'id:title' : {
+                'en_GB': 'hello',
+                'it_IT': 'ciao'
+            },
+            'id:subtitle': {
+                'en_GB': 'world',
+                'it_IT': 'mondo'
+            }
+        }
+    });
+
+    equal(
+        $('#qunit-fixture').find('.it_IT').length,
+        1, 
+        'Italian appears only once'
+    );
+  });
+
 
   module('translate', { setup: function () {
     addDropdownWidgetFunc();
