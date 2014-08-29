@@ -51,7 +51,6 @@
         'element is chainable after initialization');
   });
 
-
   module('_decomposeStringsForReferenceMapping', {
     setup: function () {
         addDropdownWidgetFunc();
@@ -125,6 +124,40 @@
         originalText : 'Hello World!',
         domNodes: [ $('#mainHeading') ]
     }, 'got expected structure');
+  });
+
+  module('init', { setup: function () {
+    addDropdownWidgetFunc();
+  }});
+
+  test('no exception thrown when translating multiple class', function () {
+    $('#qunit-fixture').append([
+        '<div class="title">hello</div>',
+        '<div class="foo">world</div>'
+    ].join(''));
+
+    // causes reference mapping to be run
+    var thrown = 0;
+    try {
+        $('#dropdown').localizationTool({
+            strings : {
+                'class:title' : {
+                    'it_IT': 'ciao',
+                    'en_GB': 'hello',
+                },
+                'class:foo' : {
+                    'it_IT': 'mondo',
+                    'en_GB': 'world'
+                }
+            }
+        });
+    }
+    catch (e) {
+        thrown = 1;
+    }
+
+    equal(thrown, 0, 'no exceptions thrown');
+
   });
 
 
