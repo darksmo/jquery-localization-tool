@@ -30,7 +30,10 @@
         <!-- 7. setup the Localization Tool! -->
         <script>
             $('#selectLanguageDropdown').localizationTool({
-                'defaultLanguage' : 'en_GB', /* (optional) although must be defined when specified */
+                'defaultLanguage' : 'en_GB', /* (optional) although must be defined if you don't want en_GB */
+                'showFlag': true,            /* (optional) show/hide the flag */
+                'showCountry': true,         /* (optional) show/hide the country name */
+                'showLanguage': true,        /* (optional) show/hide the country language */
                 'languages' : {              /* (optional) define **ADDITIONAL** custom languages */
                     'italian' : {
                         'country': 'Italy',

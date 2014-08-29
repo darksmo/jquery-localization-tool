@@ -59,6 +59,9 @@ Option | Type | Default | Description
 defaultLanguage | string | en_GB | the `language_country` code the page to translate is initially in.
 languages | object | {} | additional/custom language definitions
 strings | object | {} | pointers to the original strings and their translations in various languages
+showFlag | boolean | true | whether to show the flag on the widget
+showLanguage | boolean | true | whether to show the language name on the widget
+showCountry | boolean | true | whether to show the country name on the widget
 
 #### Methods
 

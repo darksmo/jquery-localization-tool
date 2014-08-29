@@ -65,7 +65,8 @@
          */
         '_languageCodeToHtml': function (languageCode) {
             var $this = this,
-                languagesObj = $this.data('settings').languages,
+                settings = $this.data('settings'),
+                languagesObj = settings.languages,
                 languageDefinitionObj = languagesObj[languageCode];
 
             var htmlClass = '';
@@ -81,14 +82,34 @@
             var languageName    = languageDefinitionObj.language;
             var languageCountry = languageDefinitionObj.country;
 
-            return [
-                '<li class="ltool-language ', languageCode, '">',
-                '<div class="ltool-language-flag', htmlClass, '"></div>',
-                htmlImage,
-                '<span class="ltool-language-country">',languageCountry,'</span>',
-                '<span class="ltool-language-name">', languageName ,'</span>',
-                '</li>'
-            ].join('');
+            /*
+             * Build up the html
+             */
+            var html = [];
+
+            html.push('<li class="ltool-language ', languageCode, '">');
+
+            if (settings.showFlag) {
+                html.push(
+                    '<div class="ltool-language-flag', htmlClass, '"></div>'
+                );
+                html.push(
+                    htmlImage
+                );
+            }
+            if (settings.showCountry) {
+                html.push(
+                    ['<span class="ltool-language-country">',languageCountry,'</span>'].join('')
+                );
+            }
+            if (settings.showLanguage) {
+                html.push(
+                    ['<span class="ltool-language-name">', languageName ,'</span>'].join('')
+                );
+            }
+            html.push('</li>');
+
+            return html.join('');
         },
         /**
          * Displays the given language in the dropdown menu.
@@ -881,6 +902,12 @@
 
             var settings = $.extend({
                 'defaultLanguage' : 'en_GB',
+                /* show the flag on the widget */
+                'showFlag' : true,
+                /* show the language on the widget */
+                'showLanguage': true,
+                /* show the country on the widget */
+                'showCountry': true,
                 'languages' : {
                     /*
                      * The format here is <country code>_<language code>.

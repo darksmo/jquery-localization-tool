@@ -160,6 +160,45 @@
 
   });
 
+  test('flag is disabled', function () {
+    // causes reference mapping to be run
+    $('#dropdown').localizationTool({
+        'showFlag' : false
+    });
+
+    equal(
+        $('#qunit-fixture').find('.ltool-language-flag').length,
+        0, 
+        'flag is not displayed'
+    );
+  });
+
+  test('language is disabled', function () {
+    // causes reference mapping to be run
+    $('#dropdown').localizationTool({
+        'showLanguage' : false
+    });
+
+    equal(
+        $('#qunit-fixture').find('.ltool-language-name').length,
+        0, 
+        'language is not displayed'
+    );
+  });
+
+  test('country is disabled', function () {
+    // causes reference mapping to be run
+    $('#dropdown').localizationTool({
+        'showCountry' : false
+    });
+
+    equal(
+        $('#qunit-fixture').find('.ltool-language-country').length,
+        0, 
+        'country is not displayed'
+    );
+  });
+
 
   module('translate', { setup: function () {
     addDropdownWidgetFunc();
