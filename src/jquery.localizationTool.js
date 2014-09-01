@@ -215,8 +215,7 @@
          * @access private
          */
         '_onLanguageSelected': function ($item) {
-            var $this = this,
-                settings = $this.data('settings');
+            var $this = this;
 
             // extract language code from the $item
             var languageCode = $item.attr('class')
@@ -225,14 +224,7 @@
                 .replace(/ /g, '');
 
             methods._selectLanguage.call($this, languageCode);
-
-            // Execute the callback specified by the user.
-            // If it returns false, do not translate. Note, any other
-            // value returned triggers translation.
-            //
-            if (false !== settings.onLanguageSelected(languageCode)) {
-                methods.translate.call($this, languageCode);
-            }
+            methods._mayTranslate.call($this, languageCode);
         },
         /**
          * Select the language before the current language in the list.
@@ -255,7 +247,7 @@
             // peform the selection
             $this.find('.ltool-is-selected').removeClass('ltool-is-selected');
             methods._selectLanguage.call($this, nextLanguageCode);
-            methods.translate.call($this, nextLanguageCode);
+            methods._mayTranslate.call($this, nextLanguageCode);
             $this.find('.' + nextLanguageCode).addClass('ltool-is-selected');
 
             return $this;
@@ -282,7 +274,7 @@
             // peform the selection
             $this.find('.ltool-is-selected').removeClass('ltool-is-selected');
             methods._selectLanguage.call($this, nextLanguageCode);
-            methods.translate.call($this, nextLanguageCode);
+            methods._mayTranslate.call($this, nextLanguageCode);
             $this.find('.' + nextLanguageCode).addClass('ltool-is-selected');
 
             return $this;
@@ -578,6 +570,23 @@
            $this.data('refMappingObj', refMapping);
 
            return $this;
+        },
+        /**
+         * Calls the user specified callback (if any), then translates the page.
+         * If the user returned 'false' in his/her callback, the translation is
+         * not performed.
+         * @name _mayTranslate
+         * @function
+         * @access private
+         * @param {string} [languageCode] - the language code to translate to
+         */
+        '_mayTranslate': function (languageCode) {
+            var $this = this,
+                settings = $this.data('settings');
+
+            if (false !== settings.onLanguageSelected(languageCode)) {
+                methods.translate.call($this, languageCode);
+            }
         },
         /**
          * Returns the code of the language currently selected
