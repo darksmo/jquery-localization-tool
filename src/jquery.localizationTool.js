@@ -25,7 +25,7 @@
             var $this = this,
                 activeLanguageCodes = $this.data('activeLanguageCodeArray');
 
-            var ordinal = activeLanguageCodes.indexOf(languageCode);
+            var ordinal = $.inArray(languageCode, activeLanguageCodes);
 
             if (ordinal === -1) {
                 $.error('Cannot convert ' + languageCode + ' into an ordinal number');
@@ -730,7 +730,7 @@
             }
 
             // delete the default language if it's in the guaranteed languages
-            var defaultIdx = guaranteedLanguages.indexOf(settings.defaultLanguage);
+            var defaultIdx = $.inArray(settings.defaultLanguage, guaranteedLanguages);
             if (defaultIdx > -1) {
                 // delete the default language from the array
                 guaranteedLanguages.splice(defaultIdx, 1);
