@@ -1,4 +1,4 @@
-/*! Localization Tool - v0.0.8 - 2014-08-29
+/*! Localization Tool - v0.0.9 - 2014-09-01
 * http://darksmo.github.io/jquery-localization-tool/
 * Copyright (c) 2014; Licensed MIT */
 (function($) {
@@ -22,7 +22,7 @@
             var $this = this,
                 activeLanguageCodes = $this.data('activeLanguageCodeArray');
 
-            var ordinal = activeLanguageCodes.indexOf(languageCode);
+            var ordinal = $.inArray(languageCode, activeLanguageCodes);
 
             if (ordinal === -1) {
                 $.error('Cannot convert ' + languageCode + ' into an ordinal number');
@@ -212,8 +212,7 @@
          * @access private
          */
         '_onLanguageSelected': function ($item) {
-            var $this = this,
-                settings = $this.data('settings');
+            var $this = this;
 
             // extract language code from the $item
             var languageCode = $item.attr('class')
@@ -222,14 +221,7 @@
                 .replace(/ /g, '');
 
             methods._selectLanguage.call($this, languageCode);
-
-            // Execute the callback specified by the user.
-            // If it returns false, do not translate. Note, any other
-            // value returned triggers translation.
-            //
-            if (false !== settings.onLanguageSelected(languageCode)) {
-                methods.translate.call($this, languageCode);
-            }
+            methods._mayTranslate.call($this, languageCode);
         },
         /**
          * Select the language before the current language in the list.
@@ -252,7 +244,7 @@
             // peform the selection
             $this.find('.ltool-is-selected').removeClass('ltool-is-selected');
             methods._selectLanguage.call($this, nextLanguageCode);
-            methods.translate.call($this, nextLanguageCode);
+            methods._mayTranslate.call($this, nextLanguageCode);
             $this.find('.' + nextLanguageCode).addClass('ltool-is-selected');
 
             return $this;
@@ -279,7 +271,7 @@
             // peform the selection
             $this.find('.ltool-is-selected').removeClass('ltool-is-selected');
             methods._selectLanguage.call($this, nextLanguageCode);
-            methods.translate.call($this, nextLanguageCode);
+            methods._mayTranslate.call($this, nextLanguageCode);
             $this.find('.' + nextLanguageCode).addClass('ltool-is-selected');
 
             return $this;
@@ -577,6 +569,23 @@
            return $this;
         },
         /**
+         * Calls the user specified callback (if any), then translates the page.
+         * If the user returned 'false' in his/her callback, the translation is
+         * not performed.
+         * @name _mayTranslate
+         * @function
+         * @access private
+         * @param {string} [languageCode] - the language code to translate to
+         */
+        '_mayTranslate': function (languageCode) {
+            var $this = this,
+                settings = $this.data('settings');
+
+            if (false !== settings.onLanguageSelected(languageCode)) {
+                methods.translate.call($this, languageCode);
+            }
+        },
+        /**
          * Returns the code of the language currently selected
          * @name getSelectedLanguageCode
          * @function
@@ -727,7 +736,7 @@
             }
 
             // delete the default language if it's in the guaranteed languages
-            var defaultIdx = guaranteedLanguages.indexOf(settings.defaultLanguage);
+            var defaultIdx = $.inArray(settings.defaultLanguage, guaranteedLanguages);
             if (defaultIdx > -1) {
                 // delete the default language from the array
                 guaranteedLanguages.splice(defaultIdx, 1);

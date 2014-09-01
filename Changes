@@ -1,3 +1,7 @@
+v0.0.9 Mon Sep  1 16:32:38 CEST 2014
+    * use $.inArray instead of Array.prototype.indexOf - fixes IE7/8 compatibility bug
+    * separate call to user specified callback in another function - should fix user callback not called when using the keyboard
+
 v0.0.8 Fri Aug 29 18:40:19 CEST 2014
     * Allow callback "onLanguageSelected" for when the user selects a language
     * Default country to appear once if defined in strings
