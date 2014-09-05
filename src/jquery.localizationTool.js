@@ -825,7 +825,7 @@
                     'country' : 'India',
                     'language' : 'English',
                     'countryTranslated': 'India',
-                    'languageTranslated': 'Indian',
+                    'languageTranslated': 'English',
                     'flag': {
                         'class' : 'flag flag-in'
                     }
@@ -919,6 +919,15 @@
                     'countryTranslated' : 'Россия',
                     'flag': {
                         'class': 'flag flag-ru'
+                    }
+                },
+                'hi_IN': {
+                    'country' : 'India',
+                    'language': 'Hindi',
+                    'countryTranslated': 'भारत',
+                    'languageTranslated': 'हिन्द',
+                    'flag': {
+                        'class': 'flag flag-in'
                     }
                 }
                 
