@@ -1,4 +1,4 @@
-/*! Localization Tool - v0.0.9 - 2014-09-01
+/*! Localization Tool - v0.0.10 - 2014-09-05
 * http://darksmo.github.io/jquery-localization-tool/
 * Copyright (c) 2014; Licensed MIT */
 (function($) {
@@ -822,7 +822,7 @@
                     'country' : 'India',
                     'language' : 'English',
                     'countryTranslated': 'India',
-                    'languageTranslated': 'Indian',
+                    'languageTranslated': 'English',
                     'flag': {
                         'class' : 'flag flag-in'
                     }
@@ -909,13 +909,22 @@
                         'class' : 'flag flag-pl'
                     }
                 },
-                'ru-RU': {
+                'ru_RU': {
                     'country' : 'Russia',
                     'language' : 'Russian',
                     'languageTranslated': 'Русский',
                     'countryTranslated' : 'Россия',
                     'flag': {
                         'class': 'flag flag-ru'
+                    }
+                },
+                'hi_IN': {
+                    'country' : 'India',
+                    'language': 'Hindi',
+                    'countryTranslated': 'भारत',
+                    'languageTranslated': 'हिन्द',
+                    'flag': {
+                        'class': 'flag flag-in'
                     }
                 }
                 
