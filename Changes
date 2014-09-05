@@ -1,3 +1,7 @@
+v0.0.10 Fri Sep  5 09:24:59 CEST 2014
+    * fix Russian hyphen in language code: please use ru_RU instead of ru-RU to refer to russian
+    * add Hindi
+
 v0.0.9 Mon Sep  1 16:32:38 CEST 2014
     * use $.inArray instead of Array.prototype.indexOf - fixes IE7/8 compatibility bug
     * separate call to user specified callback in another function - should fix user callback not called when using the keyboard
