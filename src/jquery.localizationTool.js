@@ -912,7 +912,7 @@
                         'class' : 'flag flag-pl'
                     }
                 },
-                'ru-RU': {
+                'ru_RU': {
                     'country' : 'Russia',
                     'language' : 'Russian',
                     'languageTranslated': 'Русский',
