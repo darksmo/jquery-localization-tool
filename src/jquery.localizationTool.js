@@ -929,6 +929,15 @@
                     'flag': {
                         'class': 'flag flag-in'
                     }
+                },
+                'tr_TR': {
+                    'country' : 'Turkey',
+                    'language' : 'Turkish',
+                    'countryTranslated': 'Türkiye',
+                    'languageTranslated': 'Türkçe',
+                    'flag': {
+                        'class': 'flag flag-tr'
+                    }
                 }
                 
             };
