@@ -1,4 +1,4 @@
-/*! Localization Tool - v0.0.10 - 2014-09-05
+/*! Localization Tool - v0.0.11 - 2014-09-09
 * http://darksmo.github.io/jquery-localization-tool/
 * Copyright (c) 2014; Licensed MIT */
 (function($) {
@@ -925,6 +925,15 @@
                     'languageTranslated': 'हिन्द',
                     'flag': {
                         'class': 'flag flag-in'
+                    }
+                },
+                'tr_TR': {
+                    'country' : 'Turkey',
+                    'language' : 'Turkish',
+                    'countryTranslated': 'Türkiye',
+                    'languageTranslated': 'Türkçe',
+                    'flag': {
+                        'class': 'flag flag-tr'
                     }
                 }
                 

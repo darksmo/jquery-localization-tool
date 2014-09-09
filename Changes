@@ -1,3 +1,6 @@
+v0.0.11 Tue Sep  9 11:43:30 CEST 2014
+    * add Turkish lanauge
+
 v0.0.10 Fri Sep  5 09:24:59 CEST 2014
     * fix Russian hyphen in language code: please use ru_RU instead of ru-RU to refer to russian
     * add Hindi
