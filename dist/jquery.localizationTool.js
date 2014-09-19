@@ -1,4 +1,4 @@
-/*! Localization Tool - v0.0.11 - 2014-09-09
+/*! Localization Tool - v0.0.12 - 2014-09-19
 * http://darksmo.github.io/jquery-localization-tool/
 * Copyright (c) 2014; Licensed MIT */
 (function($) {
@@ -934,6 +934,16 @@
                     'languageTranslated': 'Türkçe',
                     'flag': {
                         'class': 'flag flag-tr'
+                    }
+                },
+                'he_IL': {
+                    'country' : 'Israel',
+                    'language' : 'Hebrew',
+                    'countryTranslated' : 'מדינת ישראל',
+                    'languageTranslated': 'עברית',
+                    'cssDirection': 'rtl',
+                    'flag': {
+                        'class': 'flag flag-il'
                     }
                 }
                 

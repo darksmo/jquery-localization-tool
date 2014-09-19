@@ -938,6 +938,16 @@
                     'flag': {
                         'class': 'flag flag-tr'
                     }
+                },
+                'he_IL': {
+                    'country' : 'Israel',
+                    'language' : 'Hebrew',
+                    'countryTranslated' : 'מדינת ישראל',
+                    'languageTranslated': 'עברית',
+                    'cssDirection': 'rtl',
+                    'flag': {
+                        'class': 'flag flag-il'
+                    }
                 }
                 
             };
