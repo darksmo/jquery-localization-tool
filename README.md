@@ -62,12 +62,13 @@ strings | object | {} | pointers to the original strings and their translations 
 showFlag | boolean | true | whether to show the flag on the widget
 showLanguage | boolean | true | whether to show the language name on the widget
 showCountry | boolean | true | whether to show the country name on the widget
+onLanguageSelected | function | function (/*langCountryCode*/) { return true; } | a callback called as soon as the user selects the new language from the dropdown menu. Return true to trigger the translation or false to just select the language without translating.
 
 #### Methods
 
 Method | Argument | Description
 ------ | -------- | -----------
-translate | string (languageCode) | translates the text in the given language programmatically
+translate | string (languageCode) | translates the text in the given language programmatically, if no language code is specified, the default (initial) translation is used.
 destroy | None | destroys the localization tool
 
 #### JSDoc
