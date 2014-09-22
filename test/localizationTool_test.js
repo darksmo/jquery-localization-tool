@@ -40,8 +40,8 @@
     $fixture.append(commonFixtures.pluginDropdown);
   };
 
-
-
+  
+  //////////////////////////////////////////////////////////////////////////////
   module('basic tests', { setup: addDropdownWidgetFunc });
   test('is chainable', function () {
       ok($('#dropdown').localizationTool().addClass('initialized'),
@@ -51,6 +51,7 @@
         'element is chainable after initialization');
   });
 
+  //////////////////////////////////////////////////////////////////////////////
   module('_decomposeStringsForReferenceMapping', {
     setup: function () {
         addDropdownWidgetFunc();
@@ -87,6 +88,7 @@
 
 
 
+  //////////////////////////////////////////////////////////////////////////////
   module('_buildStringReferenceMapping', { setup: function () {
     addDropdownWidgetFunc();
   }});
@@ -126,6 +128,9 @@
     }, 'got expected structure');
   });
 
+
+
+  //////////////////////////////////////////////////////////////////////////////
   module('init', { setup: function () {
     addDropdownWidgetFunc();
   }});
@@ -228,6 +233,9 @@
     );
   });
 
+
+
+  //////////////////////////////////////////////////////////////////////////////
   module('translate', { setup: function () {
     addDropdownWidgetFunc();
   }});
@@ -263,11 +271,6 @@
     equal(gotCalledWith, 'en_GB', 'got called');
     
   });
-
-
-  module('translate', { setup: function () {
-    addDropdownWidgetFunc();
-  }});
 
   test('ids are translated as expected', function () {
     // fixture
@@ -620,6 +623,8 @@
   });
 
 
+  
+  //////////////////////////////////////////////////////////////////////////////
   module('_findSubsetOfUsedLanguages', { setup: function () {
     addDropdownWidgetFunc();
   }});
@@ -711,6 +716,10 @@
     deepEqual(commonLanguages, ['en_GB']);
   });
 
+
+
+
+  //////////////////////////////////////////////////////////////////////////////
   module('_languageCodeToOrdinal', { setup: function () {
     addDropdownWidgetFunc();
   }});
@@ -753,6 +762,10 @@
     });
   });
 
+
+
+
+  //////////////////////////////////////////////////////////////////////////////
   module('_ordinalToLanguageCode', { setup: function () {
     addDropdownWidgetFunc();
   }});
