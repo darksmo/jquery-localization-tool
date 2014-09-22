@@ -48,7 +48,7 @@ For live demos please visit the project webpage:
 
 [http://darksmo.github.io/jquery-localization-tool/](http://darksmo.github.io/jquery-localization-tool/)
 
-For a Quick Start have a look at the source html of the following file:
+For a Quick Start, step-by-step guide, have a look at the source html of the following file:
 
 [https://github.com/darksmo/jquery-localization-tool/blob/master/demo/index.html](https://github.com/darksmo/jquery-localization-tool/blob/master/demo/index.html)
 
