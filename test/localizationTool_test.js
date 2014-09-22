@@ -68,6 +68,7 @@
 
     var decompositionObj = $('#dropdown').localizationTool({
         'strings' : {
+            'id::id:hello' : {},
             'id:hello' : {},
             'element:pre' : {},
             'class:the_class' : {},
@@ -81,7 +82,8 @@
        idStrings : ['id:hello'],
        elementStrings: ['element:pre'],
        classStrings: ['class:the_class'],
-       textStrings: ['some text element here']
+       textStrings: ['some text element here'],
+       attributeStrings: ['id::id:hello']
     }, 'various bits decomposed as expected');
 
   });
@@ -124,6 +126,7 @@
     // let's see if it contains the 3 ids
     deepEqual(refMappingObj['id:mainHeading'], {
         originalText : 'Hello World!',
+        isAttribute: false,
         domNodes: [ $('#mainHeading') ]
     }, 'got expected structure');
   });
@@ -304,6 +307,63 @@
     // check all is translated back as expected
     equal($('#translateThis').html(), 'This is something', 'translated back as expected');
     equal($('#translateThisToo').html(), 'This is something bad!');
+
+  });
+
+  test('attributes are translated', function () {
+
+    $('#qunit-fixture').append([
+        '<h1 class="localized">This is something</h1>',
+        '<input type="text" class="localized" placeholder="insert your email here"></input>'
+    ].join(''));
+
+    // initialize
+    $('#dropdown').localizationTool({
+        strings : {
+            'class::class:localized' : { // translate the class attribute
+                it_IT: "localizzato"
+            }
+        }
+    });
+
+    // trigger translation
+    $('#dropdown').localizationTool('translate', 'it_IT');
+
+    // check
+    equal($('h1').hasClass('localized'), false, 'no "localized" exists on h1');
+    equal($('input[type=text]').hasClass('localized'), false, 'no "localized" exists on input');
+
+    equal($('h1').hasClass('localizzato'), true, '"localizzato" found on h1');
+    equal($('input[type=text]').hasClass('localizzato'), true, '"localizzato" found on input');
+
+  });
+
+  test('specific attributes are translated', function () {
+
+    $('#qunit-fixture').append([
+        '<h1 class="localized">This is something</h1>',
+        '<input type="text" class="localized" placeholder="insert your email here"></input>'
+    ].join(''));
+
+    // initialize
+    $('#dropdown').localizationTool({
+        strings : {
+            'placeholder::class:localized' : {
+                it_IT: "localizzato"
+            }
+        }
+    });
+
+    // trigger translation
+    $('#dropdown').localizationTool('translate', 'it_IT');
+
+    // check
+    equal($('input[type=text]').attr('placeholder'), 'localizzato', 'placeholder attribute was translated');
+
+    // reset back to english
+    $('#dropdown').localizationTool('translate');
+
+    equal($('input[type=text]').attr('placeholder'), 'insert your email here', 'placeholder attribute was translated back');
 
   });
 
