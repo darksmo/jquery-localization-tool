@@ -52,7 +52,7 @@
                        }
                    });<!--
                 --><div class="label" style="top: 4em;">
-                            point to <span class="hi">source string</span>
+                            this is the <span class="hi">source string selector</span>
                 </div><!--
                 --><div class="label" style="top: 6em;">
                           translate!
@@ -67,7 +67,7 @@
             </section>
             <section>
                 <h3>Flexible</h3>
-                <p>Many ways to point to <span class="hi">source strings</span>:</p>
+                <p>Select the text of DOM elements to translate directly via <span class="hi">source string selectors</span>:</p>
                 <div class="l-columns">
                     <div class="l-head-text">
                         <div>by ID</div>
@@ -87,10 +87,26 @@
                             element:h2
                         </div>
                     </div>
+                </div>
+                <br />
+                <br />
+                <p>You can use any text as well, and DOM elements will be extracted from the page automatically!</p>
+                <div class="l-columns">
                     <div class="l-head-text">
-                        <div>by wathever TEXT</div>
+                        <div>by whatever TEXT</div>
                         <div>
                             Hello!
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <p>And from version 0.0.13, you can translate attributes as well! <br />Use <span class="highlight1">&lt;attributeName&gt;::</span><span class="highlight2">&lt;id|class|element selector&gt;</span> to select attributes:</p>
+                <div class="l-columns">
+                    <div class="l-head-text">
+                        <div>by ATTRIBUTE</div>
+                        <div>
+                            <span class="highlight1">placeholder::</span><span class="highlight2">element:input</span>
                         </div>
                     </div>
                 </div>

@@ -36,6 +36,13 @@ h1 {
     font-size: 2em;
 }
 
+.highlight1 {
+    color: #C28300;
+}
+.highlight2 {
+    color: #00C27D;
+}
+
 #widget {
     z-index: 2;
 }
@@ -125,10 +132,23 @@ pre {
 }
 
 .l-head-text {
-    width: 22%;
+    width: 28%;
     margin-right: 1%;
     text-align: center;
     font-size: 0.7em;
+    background-image: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            color-stop(0, #333333),
+            color-stop(0.75, #FFFFFF)
+            );
+    background-image: -o-linear-gradient(bottom, #333333 0%, #FFFFFF 75%);
+    background-image: -moz-linear-gradient(bottom, #333333 0%, #FFFFFF 75%);
+    background-image: -webkit-linear-gradient(bottom, #333333 0%, #FFFFFF 75%);
+    background-image: -ms-linear-gradient(bottom, #333333 0%, #FFFFFF 75%);
+    background-image: linear-gradient(to bottom, #333333 0%, #FFFFFF 75%);
+    border-left: 1px solid #DDD;
 }
 .l-head-text div:first-child{
     background: #333;
