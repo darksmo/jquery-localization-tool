@@ -1,4 +1,4 @@
-/*! Localization Tool - v0.0.12 - 2014-09-19
+/*! Localization Tool - v0.0.13 - 2014-09-22
 * http://darksmo.github.io/jquery-localization-tool/
 * Copyright (c) 2014; Licensed MIT */
 (function($) {
@@ -346,8 +346,9 @@
             return $this;
         },
         /**
-         * Analizes the input strings object and decomposes its keys in four
-         * sections: text strings, id strings, class strings, element strings.
+         * Analizes the input strings object and decomposes its keys in
+         * sections: text strings, id strings, class strings, element strings,
+         * attribute strings.
          * @name _decomposeStringsForReferenceMapping
          * @function
          * @access private
@@ -358,17 +359,23 @@
                 'idStrings' : [],
                 'classStrings' : [],
                 'elementStrings' : [],
-                'textStrings' : []
+                'textStrings' : [],
+                'attributeStrings' : []
             };
 
             var $this = this,
                 stringsObj = $this.data('settings').strings;
 
+            // regexp for attributes matching
+            var attrRegexp = new RegExp('^[a-zA-Z-]+?::');
+
             var stringKey;
             for (stringKey in stringsObj) {
                 if (stringsObj.hasOwnProperty(stringKey)) {
-                    // analysis
-                    if (stringKey.indexOf('id:') === 0) {
+                    if (stringKey.match(attrRegexp)) {   // NOTE: check first!
+                        decompositionObj.attributeStrings.push(stringKey);
+                    } 
+                    else if (stringKey.indexOf('id:') === 0) {
                         decompositionObj.idStrings.push(stringKey);
                     }
                     else if (stringKey.indexOf('class:') === 0) {
@@ -388,7 +395,7 @@
         /**
          * Goes through each text node and builds a string reference mapping.
          * It is a mapping (an object) 
-         * STRING_IDENTIFIER -> <ORIGINAL_HTML, [DOM_NODES]> 
+         * STRING_IDENTIFIER -> <IS_ATTRIBUTE?, ORIGINAL_HTML, [DOM_NODES]> 
          * used later for the translation. See init method for a
          * reference. The resulting object is stored internally in
          * $this.data('refMappingObj') as refMapping.
@@ -408,6 +415,7 @@
            /*
             * First go through each id
             */
+
            var idString, i;
            for (i=0; idString = decompositionObj.idStrings[i++];) {
 
@@ -424,6 +432,7 @@
                else {
                    // add this to the refMapping
                    refMapping[idString] = {
+                       isAttribute : false, // it's an id: selector
                        originalText : $idNode.text(),
                        domNodes : [ $idNode ]
                    };
@@ -517,6 +526,7 @@
                    else {
                        // all good
                        refMapping[string] = {
+                           isAttribute : false, // it's a class: or an element: selector
                            originalText : domNodeText,
                            domNodes : domNodesArray
                        };
@@ -535,6 +545,74 @@
             * Then go through elements
             */
            processMultipleElements('element:', '', true, true);
+
+           /*
+            * Time to process the attributes
+            */
+           var firstSelectorStringRegex = new RegExp('(class|id|element):[^:]');
+           var attrString;
+           for (i=0; attrString = decompositionObj.attributeStrings[i++];) {
+
+
+                // let's extract the attribute name from the element selector
+                var splitStringArray = attrString.split("::");
+                var attributeString = splitStringArray.shift();
+
+
+                // sanity check on the format
+                if (splitStringArray.length === 0) {
+                    $.error('sorry, you need to specify class:, element: or id: selectors in ' + attrString);
+                }
+
+                var selectorString = splitStringArray.join('::');
+
+                if (!splitStringArray[0].match(firstSelectorStringRegex)) {
+                    $.error(attrString + "Doesn't look right. Perhaps you've added extra semicolons?");
+                }
+
+
+                // turn selector into jQuery selector
+                selectorString = selectorString.replace('id:', '#');
+                selectorString = selectorString.replace('class:', '.');
+                selectorString = selectorString.replace('element:', '');
+
+                // find DOM nodes
+                var $domNodes = $(selectorString + '[' + attributeString + ']');
+                if ($domNodes.length === 0) {
+                    $.error('The selector "' + attrString + '" does not point to an existing DOM element');
+                }
+
+
+                // avoid using Array.prototype.reduce as it's supported in IE9+
+                var j = 0,
+                    allSameAttributeValue = true;
+
+                var attributeText = $($domNodes[0]).attr(attributeString);
+
+                var domNodesToAdd = [];
+
+                for (j=0; j<$domNodes.length; j++) {
+                    // check the placeholder text is all the same
+                    var $dom = $($domNodes[j]);
+                    if (attributeText !== $dom.attr(attributeString)) {
+                        allSameAttributeValue = false;
+                    }
+
+                    // also add for later...
+                    domNodesToAdd.push($dom);
+                }
+                if (!allSameAttributeValue) {
+                    $.error('Not all the attribute values selected via ' + attrString + ' are the same');
+                }
+
+                // now we have everything in place, we just add it to the rest!
+                refMapping[attrString] = {
+                    isAttribute : true,  // yes, we are dealing with an attribute here
+                    originalText : attributeText,
+                    domNodes : domNodesToAdd
+                };
+           }
+
 
            /*
             * Finally find the dom nodes associated to any text searched
@@ -558,6 +636,7 @@
               if (textNodesToAdd.length > 0) {
                   // all good
                   refMapping[textString] = {
+                      isAttribute: false, // no it's just another dom element
                       originalText : textString,
                       domNodes : textNodesToAdd
                   };
@@ -629,6 +708,7 @@
             for (string in refMappingObj) {
                 if (refMappingObj.hasOwnProperty(string)) {
 
+                    // get the translation for this string...
                     var translation;
                     if (typeof languageCode === 'undefined' || languageCode === settings.defaultLanguage) {
                         translation = refMappingObj[string].originalText;
@@ -638,13 +718,25 @@
                     }
 
                     var domNodes = refMappingObj[string].domNodes;
+
                     var $domNode, i;
 
-                    for (i=0; $domNode = domNodes[i++];) {
+                    // attribute case
+                    if (refMappingObj[string].isAttribute === true) {
+                        var attributeName = string.split("::", 1)[0];
 
-                        $domNode.html(translation);
-
-                        $domNode.css('direction', cssDirection);
+                        for (i=0; $domNode = domNodes[i++];) {
+                            $domNode.attr(attributeName, translation);
+                            $domNode.css('direction', cssDirection);
+                        }
+                        
+                    }
+                    else {
+                        // all other cases
+                        for (i=0; $domNode = domNodes[i++];) {
+                            $domNode.html(translation);
+                            $domNode.css('direction', cssDirection);
+                        }
                     }
                 }
             }

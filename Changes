@@ -1,3 +1,6 @@
+v0.0.13 Mon Sep 22 07:34:21 CEST 2014
+    * translate attributes with a syntax like <attributeName>::<elementSelector> (e.g., placeholder::element:input)
+
 v0.0.12 Fri Sep 19 16:53:19 CEST 2014
     * add Hebrew/Israel
 
