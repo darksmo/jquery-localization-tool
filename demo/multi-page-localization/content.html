@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Multi-pages!</title>
+        <link type="text/css" rel="stylesheet" href="/dist/jquery.localizationTool.css">
+    </head>
+    <body style="display:none">
+
+        <!--
+            Place our amazing widget at the top of the page
+        -->
+        <div id="selectLanguageDropdown" class="localizationTool"></div>
+
+        <!-- 
+            The content we want to translate in the page.
+        -->
+        <h2>The content</h2>
+
+        <!--
+            This is a link to the next page that should be consistent with the
+            current translation chosen by the user.
+        -->
+        <a id="goback" href="index.html">Go back to the index</a>
+
+
+        <!--
+            jQuery to be included before the plugin
+        -->
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+        <!--
+            The plugin
+        -->
+        <script src="js/jquery.cookie.js"></script>
+        <script src="/dist/jquery.localizationTool.js"></script>
+
+        <!--
+            The plugin initialization
+        -->
+        <script>
+
+            $('#selectLanguageDropdown').localizationTool({
+                'defaultLanguage' : 'en_GB', // this is the language that the server is sending anyway
+                'ignoreUnmatchedSelectors' : true,
+                'showFlag': true,            
+                'showCountry': true,         
+                'showLanguage': true,
+                'onLanguageSelected' : function (languageCode) {
+                    /*
+                     * When the user translates we set the cookie
+                     */
+                    $.cookie('userLanguage', languageCode);
+
+                    return true;
+                },
+
+                /* 
+                 * Translate the strings that appear in all the pages below
+                 */
+                'strings' : {
+                    'element:h1' : {
+                        'it_IT' : 'Ciao!',
+                        'es_ES' : 'hola',
+                        'fr_FR' : 'salut'
+                    },
+                    'id:gotolink' : {
+                        'it_IT' : 'vai al contenuto',
+                        'es_ES' : 'Ir al contenido',
+                        'fr_FR' : 'Aller au contenu'
+                    },
+                    'element:h2' : {
+                        'it_IT' : "Il contenuto",
+                        'es_ES' : 'El contenido',
+                        'fr_FR' : "Le contenu",
+                    },
+                    'id:goback' : {
+                        'it_IT' : "torna all'indice",
+                        'es_ES' : 'Ir al índice',
+                        'fr_FR' : "Aller à l'index"
+                    }
+                }
+            });
+
+            var userLanguage = $.cookie('userLanguage');
+            if (typeof userLanguage !== 'undefined') {
+                $('#selectLanguageDropdown').localizationTool('translate', userLanguage);
+            }
+            $('body').show();
+
+        </script>
+    </body>
+</html>
