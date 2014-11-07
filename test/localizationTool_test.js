@@ -682,6 +682,31 @@
 
   });
 
+  test('the widget displays the translation language when translate is called programmatically', function () {
+    // fixture
+    $('#qunit-fixture').append([
+        '<h1 class="translateme">hello</h1>',
+    ].join(''));
+
+    // initialize
+    $('#dropdown').localizationTool({
+        strings : {
+            'class:translateme' : {
+                it_IT : "ciao"
+            }
+        }
+    });
+
+    var htmlBeforeTranslation = $('#dropdown .ltool-dropdown-label').html();
+
+    // trigger translation
+    $('#dropdown').localizationTool('translate', 'it_IT');
+
+    var htmlAfterTranslation = $('#dropdown .ltool-dropdown-label').html();
+
+    notEqual(htmlAfterTranslation, htmlBeforeTranslation, 'the widget has actually changed its html');
+    equal(htmlAfterTranslation, '<div class="ltool-language-flag flag flag-it"></div><span class="ltool-language-country">Italy</span><span class="ltool-language-name">Italian</span>', 'got expected html');
+  });
 
   
   //////////////////////////////////////////////////////////////////////////////

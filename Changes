@@ -1,3 +1,6 @@
+v0.0.14 T.B.D.
+    * change the widget heading when translation is called programmatically
+
 v0.0.13 Mon Sep 22 07:34:21 CEST 2014
     * translate attributes with a syntax like <attributeName>::<elementSelector> (e.g., placeholder::element:input)
 

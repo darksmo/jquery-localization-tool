@@ -664,7 +664,7 @@
                 settings = $this.data('settings');
 
             if (false !== settings.onLanguageSelected(languageCode)) {
-                methods.translate.call($this, languageCode);
+                methods._translate.call($this, languageCode);
             }
         },
         /**
@@ -685,7 +685,7 @@
          * @access public
          * @param {string} [languageCode] - the language to translate to.
          */
-        'translate': function (languageCode) {
+        '_translate': function (languageCode) {
             var $this = this,
                 settings = $this.data('settings'),
                 stringsObj = settings.strings,
@@ -743,6 +743,22 @@
                     }
                 }
             }
+
+            return $this;
+        },
+        /**
+         * Translates according to the widget configuration programmatically.
+         * This is meant to be called by the user. The difference with the
+         * private counterpart _translate method is that the language is
+         * selected in the widget.
+         */
+        'translate' : function (languageCode) {
+            var $this = this;
+
+            methods._translate.call($this, languageCode);
+
+            // must also select the language when translating via the public method
+            methods._selectLanguage.call($this, languageCode);
 
             return $this;
         },
