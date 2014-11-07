@@ -410,7 +410,8 @@
 
            var $this = this,
                refMapping = {},
-               stringsObj = $this.data('settings').strings;
+               settings = $this.data('settings'),
+               stringsObj = settings.strings;
 
            // decompose the initial strings in various bits
            var decompositionObj = methods._decomposeStringsForReferenceMapping.call($this);
@@ -426,7 +427,11 @@
                var $idNode = $('#' + idStringName);
                var contents = $idNode.contents();
 
-               if (contents.length === 0 || contents.length > 1) {
+               if (settings.ignoreUnmatchedSelectors === true && contents.length === 0) {
+                   continue;
+               }
+
+               if (contents.length !== 1) {
                    $.error(idString + ' must contain exactly one text node, found ' + contents.length + ' instead');
                }
                else if (contents[0].nodeType !== 3) {
@@ -1062,6 +1067,8 @@
 
             var settings = $.extend({
                 'defaultLanguage' : 'en_GB',
+                /* do not throw error if a selector doesn't match */
+                'ignoreUnmatchedSelectors': false,
                 /* show the flag on the widget */
                 'showFlag' : true,
                 /* show the language on the widget */
