@@ -1,4 +1,4 @@
-/*! Localization Tool - v0.0.13 - 2014-09-22
+/*! Localization Tool - v0.0.14 - 2014-11-07
 * http://darksmo.github.io/jquery-localization-tool/
 * Copyright (c) 2014; Licensed MIT */
 (function($) {
@@ -407,7 +407,8 @@
 
            var $this = this,
                refMapping = {},
-               stringsObj = $this.data('settings').strings;
+               settings = $this.data('settings'),
+               stringsObj = settings.strings;
 
            // decompose the initial strings in various bits
            var decompositionObj = methods._decomposeStringsForReferenceMapping.call($this);
@@ -423,7 +424,11 @@
                var $idNode = $('#' + idStringName);
                var contents = $idNode.contents();
 
-               if (contents.length === 0 || contents.length > 1) {
+               if (settings.ignoreUnmatchedSelectors === true && contents.length === 0) {
+                   continue;
+               }
+
+               if (contents.length !== 1) {
                    $.error(idString + ' must contain exactly one text node, found ' + contents.length + ' instead');
                }
                else if (contents[0].nodeType !== 3) {
@@ -661,7 +666,7 @@
                 settings = $this.data('settings');
 
             if (false !== settings.onLanguageSelected(languageCode)) {
-                methods.translate.call($this, languageCode);
+                methods._translate.call($this, languageCode);
             }
         },
         /**
@@ -682,7 +687,7 @@
          * @access public
          * @param {string} [languageCode] - the language to translate to.
          */
-        'translate': function (languageCode) {
+        '_translate': function (languageCode) {
             var $this = this,
                 settings = $this.data('settings'),
                 stringsObj = settings.strings,
@@ -740,6 +745,22 @@
                     }
                 }
             }
+
+            return $this;
+        },
+        /**
+         * Translates according to the widget configuration programmatically.
+         * This is meant to be called by the user. The difference with the
+         * private counterpart _translate method is that the language is
+         * selected in the widget.
+         */
+        'translate' : function (languageCode) {
+            var $this = this;
+
+            methods._translate.call($this, languageCode);
+
+            // must also select the language when translating via the public method
+            methods._selectLanguage.call($this, languageCode);
 
             return $this;
         },
@@ -1043,6 +1064,8 @@
 
             var settings = $.extend({
                 'defaultLanguage' : 'en_GB',
+                /* do not throw error if a selector doesn't match */
+                'ignoreUnmatchedSelectors': false,
                 /* show the flag on the widget */
                 'showFlag' : true,
                 /* show the language on the widget */
