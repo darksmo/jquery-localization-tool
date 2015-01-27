@@ -1,6 +1,6 @@
-/*! Localization Tool - v0.0.14 - 2014-11-07
+/*! Localization Tool - v0.0.14 - 2015-01-27
 * http://darksmo.github.io/jquery-localization-tool/
-* Copyright (c) 2014; Licensed MIT */
+* Copyright (c) 2015; Licensed MIT */
 (function($) {
     var _keyboardPressed = false;
 
@@ -1058,8 +1058,16 @@
                     'flag': {
                         'class': 'flag flag-il'
                     }
+                },
+                'da_DK' : {
+                    'country' : 'Denmark',
+                    'language' : 'Danish',
+                    'countryTranslated': 'Danmark',
+                    'languageTranslated': 'Dansk',
+                    'flag' : {
+                        'class': 'flag flag-dk'
+                    }
                 }
-                
             };
 
             var settings = $.extend({

@@ -1061,8 +1061,16 @@
                     'flag': {
                         'class': 'flag flag-il'
                     }
+                },
+                'da_DK' : {
+                    'country' : 'Denmark',
+                    'language' : 'Danish',
+                    'countryTranslated': 'Danmark',
+                    'languageTranslated': 'Dansk',
+                    'flag' : {
+                        'class': 'flag flag-dk'
+                    }
                 }
-                
             };
 
             var settings = $.extend({
