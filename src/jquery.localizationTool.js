@@ -1070,6 +1070,13 @@
                     'flag' : {
                         'class': 'flag flag-dk'
                     }
+                },
+                'eo' : {
+                    'language' : 'Esperanto',
+                    'languageTranslated' : 'Esperanto',
+                    'flag' : {
+                        'class': 'flag flag-esperanto'
+                    }
                 }
             };
 
