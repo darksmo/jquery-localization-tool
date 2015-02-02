@@ -1,4 +1,4 @@
-/*! Localization Tool - v0.0.14 - 2015-01-27
+/*! Localization Tool - v0.0.14 - 2015-02-03
 * http://darksmo.github.io/jquery-localization-tool/
 * Copyright (c) 2015; Licensed MIT */
 (function($) {
@@ -913,7 +913,7 @@
                         'class' : 'flag flag-fr'
                     }
                 },
-                'br_PT' : {
+                'pt_BR' : {
                     'country' : 'Brazil',
                     'language' : 'Portuguese',
                     'countryTranslated': 'Brasil',

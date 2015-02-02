@@ -26,7 +26,7 @@ $("#localizationToolbar").localizationTool({
             'fr_FR' : 'French translation here',
             'es_ES' : 'Spanish translation here',
             'en_AU' : 'Australian english translation here',
-            'br_PT' : 'Portuguese translation here',
+            'pt_BR' : 'Portuguese translation here',
             'en_GB' : 'British english translation here',
             'jp_JP' : 'Japanese translation here',
             'ar_TN' : 'Arabic translation here',
