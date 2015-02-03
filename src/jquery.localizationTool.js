@@ -916,7 +916,7 @@
                         'class' : 'flag flag-fr'
                     }
                 },
-                'br_PT' : {
+                'pt_BR' : {
                     'country' : 'Brazil',
                     'language' : 'Portuguese',
                     'countryTranslated': 'Brasil',
@@ -1069,6 +1069,13 @@
                     'languageTranslated': 'Dansk',
                     'flag' : {
                         'class': 'flag flag-dk'
+                    }
+                },
+                'eo' : {
+                    'language' : 'Esperanto',
+                    'languageTranslated' : 'Esperanto',
+                    'flag' : {
+                        'class': 'flag flag-esperanto'
                     }
                 }
             };
