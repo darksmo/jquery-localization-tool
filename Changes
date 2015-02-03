@@ -2,6 +2,7 @@ Next Version
     * add Danish
     * add Esperanto
     * allow languages without a country
+    * correct Brazilian Portuguese language code
 
 v0.0.14 Fri Nov  7 19:51:15 CET 2014
     * change the widget heading when translation is called programmatically

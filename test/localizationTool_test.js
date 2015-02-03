@@ -809,7 +809,7 @@
                 'string2' : {
                    'de_DE' : 'translation4',
                    'es_ES' : 'translation5',
-                   'br_PT' : 'translation6'
+                   'pt_BR' : 'translation6'
                 },
                 'string3' : {
                    'en_US' : 'translation7',
@@ -835,7 +835,7 @@
                 'string2' : {
                    'de_DE' : 'translation4',
                    'es_ES' : 'translation5',
-                   'br_PT' : 'translation6'
+                   'pt_BR' : 'translation6'
                 },
                 'string3' : {
                    'en_US' : 'translation7',
