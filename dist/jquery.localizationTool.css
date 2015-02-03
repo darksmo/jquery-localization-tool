@@ -841,10 +841,10 @@
 .localizationTool .ltool-language-name {
   color: #8dc1e2;
 }
-.localizationTool .ltool-language-name:before {
+.localizationTool .ltool-language-name.ltool-has-country:before {
   content: '(';
 }
-.localizationTool .ltool-language-name:after {
+.localizationTool .ltool-language-name.ltool-has-country:after {
   content: ')';
 }
 .localizationTool .ltool-language-flag {

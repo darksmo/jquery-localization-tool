@@ -1,4 +1,4 @@
-/*! Localization Tool - v0.0.14 - 2015-02-02
+/*! Localization Tool - v0.0.14 - 2015-02-03
 * http://darksmo.github.io/jquery-localization-tool/
 * Copyright (c) 2015; Licensed MIT */
 (function($) {
@@ -77,7 +77,7 @@
             }
 
             var languageName    = languageDefinitionObj.language;
-            var languageCountry = languageDefinitionObj.country;
+            var haveCountry = languageDefinitionObj.hasOwnProperty('country');
 
             /*
              * Build up the html
@@ -94,14 +94,17 @@
                     htmlImage
                 );
             }
-            if (settings.showCountry) {
+
+            if (settings.showCountry && haveCountry) {
                 html.push(
-                    ['<span class="ltool-language-country">',languageCountry,'</span>'].join('')
+                    ['<span class="ltool-language-country">', languageDefinitionObj.country, '</span>'].join('')
                 );
             }
             if (settings.showLanguage) {
+                var hasCountryClass = haveCountry ? 'ltool-has-country ' : "";
+                
                 html.push(
-                    ['<span class="ltool-language-name">', languageName ,'</span>'].join('')
+                    ['<span class="', hasCountryClass, 'ltool-language-name">', languageName ,'</span>'].join('')
                 );
             }
             html.push('</li>');
@@ -797,6 +800,36 @@
             return $this;
         },
         /**
+         * Sorts the given array of countryLanguageCodes by country name.
+         * If a language has no name goes to the bottom of the list.
+         *
+         * @name _sortCountryLanguagesByCountryName
+         * @function
+         * @access private
+         * @param {object} languagesDefinition - the array countryLanguageCodes defined during initialization.
+         * @param {array} arrayOfCountryLanguageCodes - the input array countryLanguageCodes.
+         * @returns {array} sortedArrayOfCountryLanguageCodes - the sorted array countryLanguageCodes.
+         */
+        '_sortCountryLanguagesByCountryName': function (languagesDefinition, arrayOfCountryLanguageCodes) {
+            return arrayOfCountryLanguageCodes.sort(function (a, b) {
+                if (languagesDefinition[a].hasOwnProperty('country') && languagesDefinition[b].hasOwnProperty('country')) {
+                    return languagesDefinition[a].country.localeCompare(
+                        languagesDefinition[b].country
+                    );
+                }
+                else if (languagesDefinition[a].hasOwnProperty('country')) {
+                    return languagesDefinition[a].country.localeCompare(
+                        languagesDefinition[b].language
+                    );
+                }
+                // else if (languagesDefinition[b].hasOwnProperty('country')) {
+                return languagesDefinition[a].language.localeCompare(
+                    languagesDefinition[b].country
+                );
+                // }
+            });
+        },
+        /**
          * Goes through each string defined and extracts the common subset of
          * languages that actually used. The default language is added to this
          * subset a priori. The resulting list is sorted by country name.
@@ -858,14 +891,11 @@
             // add the default language in front
             guaranteedLanguages.unshift(settings.defaultLanguage);
 
-            // now sort by country name
-            guaranteedLanguages.sort(function (a, b) {
-                return settings.languages[a].country.localeCompare(
-                    settings.languages[b].country
-                );
-            });
-
-            return guaranteedLanguages;
+            return methods._sortCountryLanguagesByCountryName.call(
+                this,
+                settings.languages,
+                guaranteedLanguages
+            );
         },
         /**
          * Initialises the localization tool plugin.
@@ -876,6 +906,7 @@
          * @returns jqueryObject
          */
         'init' : function(options) {
+            // NOTE: "country" is optional
             var knownLanguages = {
                 'en_GB' : {
                     'country' : 'United Kingdom',
@@ -1069,6 +1100,7 @@
                     }
                 },
                 'eo' : {
+                    // NOTE: no country
                     'language' : 'Esperanto',
                     'languageTranslated' : 'Esperanto',
                     'flag' : {

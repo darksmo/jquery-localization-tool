@@ -107,7 +107,7 @@
             }
 
             var languageName    = languageDefinitionObj.language;
-            var languageCountry = languageDefinitionObj.country;
+            var haveCountry = languageDefinitionObj.hasOwnProperty('country');
 
             /*
              * Build up the html
@@ -124,14 +124,17 @@
                     htmlImage
                 );
             }
-            if (settings.showCountry) {
+
+            if (settings.showCountry && haveCountry) {
                 html.push(
-                    ['&lt;span class="ltool-language-country">',languageCountry,'&lt;/span>'].join('')
+                    ['&lt;span class="ltool-language-country">', languageDefinitionObj.country, '&lt;/span>'].join('')
                 );
             }
             if (settings.showLanguage) {
+                var hasCountryClass = haveCountry ? 'ltool-has-country ' : "";
+                
                 html.push(
-                    ['&lt;span class="ltool-language-name">', languageName ,'&lt;/span>'].join('')
+                    ['&lt;span class="', hasCountryClass, 'ltool-language-name">', languageName ,'&lt;/span>'].join('')
                 );
             }
             html.push('&lt;/li>');
@@ -827,6 +830,36 @@
             return $this;
         },
         /**
+         * Sorts the given array of countryLanguageCodes by country name.
+         * If a language has no name goes to the bottom of the list.
+         *
+         * @name _sortCountryLanguagesByCountryName
+         * @function
+         * @access private
+         * @param {object} languagesDefinition - the array countryLanguageCodes defined during initialization.
+         * @param {array} arrayOfCountryLanguageCodes - the input array countryLanguageCodes.
+         * @returns {array} sortedArrayOfCountryLanguageCodes - the sorted array countryLanguageCodes.
+         */
+        '_sortCountryLanguagesByCountryName': function (languagesDefinition, arrayOfCountryLanguageCodes) {
+            return arrayOfCountryLanguageCodes.sort(function (a, b) {
+                if (languagesDefinition[a].hasOwnProperty('country') && languagesDefinition[b].hasOwnProperty('country')) {
+                    return languagesDefinition[a].country.localeCompare(
+                        languagesDefinition[b].country
+                    );
+                }
+                else if (languagesDefinition[a].hasOwnProperty('country')) {
+                    return languagesDefinition[a].country.localeCompare(
+                        languagesDefinition[b].language
+                    );
+                }
+                // else if (languagesDefinition[b].hasOwnProperty('country')) {
+                return languagesDefinition[a].language.localeCompare(
+                    languagesDefinition[b].country
+                );
+                // }
+            });
+        },
+        /**
          * Goes through each string defined and extracts the common subset of
          * languages that actually used. The default language is added to this
          * subset a priori. The resulting list is sorted by country name.
@@ -888,14 +921,11 @@
             // add the default language in front
             guaranteedLanguages.unshift(settings.defaultLanguage);
 
-            // now sort by country name
-            guaranteedLanguages.sort(function (a, b) {
-                return settings.languages[a].country.localeCompare(
-                    settings.languages[b].country
-                );
-            });
-
-            return guaranteedLanguages;
+            return methods._sortCountryLanguagesByCountryName.call(
+                this,
+                settings.languages,
+                guaranteedLanguages
+            );
         },
         /**
          * Initialises the localization tool plugin.
@@ -906,6 +936,7 @@
          * @returns jqueryObject
          */
         'init' : function(options) {
+            // NOTE: "country" is optional
             var knownLanguages = {
                 'en_GB' : {
                     'country' : 'United Kingdom',
@@ -1099,6 +1130,7 @@
                     }
                 },
                 'eo' : {
+                    // NOTE: no country
                     'language' : 'Esperanto',
                     'languageTranslated' : 'Esperanto',
                     'flag' : {
@@ -1229,13 +1261,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#_bindEvents">_bindEvents</a></li><li><a href="global.html#_buildStringReferenceMapping">_buildStringReferenceMapping</a></li><li><a href="global.html#_decomposeStringsForReferenceMapping">_decomposeStringsForReferenceMapping</a></li><li><a href="global.html#_findSubsetOfUsedLanguages">_findSubsetOfUsedLanguages</a></li><li><a href="global.html#_initializeWidget">_initializeWidget</a></li><li><a href="global.html#_languageCodeToHtml">_languageCodeToHtml</a></li><li><a href="global.html#_languageCodeToOrdinal">_languageCodeToOrdinal</a></li><li><a href="global.html#_mayTranslate">_mayTranslate</a></li><li><a href="global.html#_onDropdownClicked">_onDropdownClicked</a></li><li><a href="global.html#_onKeydown">_onKeydown</a></li><li><a href="global.html#_onLanguageSelected">_onLanguageSelected</a></li><li><a href="global.html#_onMouseout">_onMouseout</a></li><li><a href="global.html#_ordinalToLanguageCode">_ordinalToLanguageCode</a></li><li><a href="global.html#_selectLanguage">_selectLanguage</a></li><li><a href="global.html#_selectPreviousLanguage">_selectPreviousLanguage</a></li><li><a href="global.html#destroy">destroy</a></li><li><a href="global.html#getSelectedLanguageCode">getSelectedLanguageCode</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#translate">translate</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#_bindEvents">_bindEvents</a></li><li><a href="global.html#_buildStringReferenceMapping">_buildStringReferenceMapping</a></li><li><a href="global.html#_decomposeStringsForReferenceMapping">_decomposeStringsForReferenceMapping</a></li><li><a href="global.html#_findSubsetOfUsedLanguages">_findSubsetOfUsedLanguages</a></li><li><a href="global.html#_initializeWidget">_initializeWidget</a></li><li><a href="global.html#_languageCodeToHtml">_languageCodeToHtml</a></li><li><a href="global.html#_languageCodeToOrdinal">_languageCodeToOrdinal</a></li><li><a href="global.html#_mayTranslate">_mayTranslate</a></li><li><a href="global.html#_onDropdownClicked">_onDropdownClicked</a></li><li><a href="global.html#_onKeydown">_onKeydown</a></li><li><a href="global.html#_onLanguageSelected">_onLanguageSelected</a></li><li><a href="global.html#_onMouseout">_onMouseout</a></li><li><a href="global.html#_ordinalToLanguageCode">_ordinalToLanguageCode</a></li><li><a href="global.html#_selectLanguage">_selectLanguage</a></li><li><a href="global.html#_selectPreviousLanguage">_selectPreviousLanguage</a></li><li><a href="global.html#_sortCountryLanguagesByCountryName">_sortCountryLanguagesByCountryName</a></li><li><a href="global.html#destroy">destroy</a></li><li><a href="global.html#getSelectedLanguageCode">getSelectedLanguageCode</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#translate">translate</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Mon Feb 02 2015 21:31:15 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue Feb 03 2015 01:23:24 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>
