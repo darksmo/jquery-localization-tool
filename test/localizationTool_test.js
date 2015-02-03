@@ -40,6 +40,18 @@
     $fixture.append(commonFixtures.pluginDropdown);
   };
 
+  var findLanguagesWithNoCountry = function (languageObject) {
+    var result = [];
+    for (var countryLanguageCode in languageObject) {
+        if (languageObject.hasOwnProperty(countryLanguageCode)) {
+            if (false === languageObject[countryLanguageCode].hasOwnProperty('country')) {
+               result.push(countryLanguageCode);
+            }
+        }
+    }
+    return result;
+  };
+
   
   //////////////////////////////////////////////////////////////////////////////
   module('basic tests', { setup: addDropdownWidgetFunc });
@@ -236,7 +248,77 @@
     );
   });
 
+  test('languages with no country are displayed without paretheses on the widget', function () {
+    // initialize widget
+    $('#dropdown').localizationTool();
 
+    // find out languages without a country specified
+    var allLanguages = $('#dropdown').data('settings').languages;
+    var languageCountryCodes = findLanguagesWithNoCountry(allLanguages);
+
+    // now check that the markup for each country code is rendered without parentheses.
+    var idx=0, lcc;
+    for (; lcc = languageCountryCodes[idx++];) {
+        $('#dropdown')
+            .localizationTool('destroy')
+            .localizationTool({
+                defaultLanguage : lcc
+            });
+
+        equal(0, $('#dropdown .ltool-language-name.ltool-has-country').length, "no country found for " + lcc);
+    }
+
+  });
+
+  //////////////////////////////////////////////////////////////////////////////
+  module('_sortCountryLanguagesByCountryName', { setup: function () {
+    addDropdownWidgetFunc();
+  }});
+
+  test('languages are sorted as expected', function () {
+    $('#dropdown').localizationTool();
+
+    var initialArray = ['de_DE', 'en_GB', 'it_IT'];
+
+    var sortedArray = $('#dropdown').localizationTool('_sortCountryLanguagesByCountryName',
+        { 'de_DE' : { 'country' : 'Germany' },
+          'en_GB' : { 'country' : 'United Kingdom' },
+          'it_IT' : { 'country' : 'Italy' }
+        },
+        initialArray
+    );
+
+    deepEqual(sortedArray, ['de_DE', 'it_IT', 'en_GB'], 'case 1');
+
+    var sortedArray2 = $('#dropdown').localizationTool('_sortCountryLanguagesByCountryName',
+        { 'de_DE' : { 'country' : 'Zermany' },
+          'en_GB' : { 'country' : 'United Kingdom' },
+          'it_IT' : { 'country' : 'Ataly' }
+        },
+        initialArray
+    );
+
+    deepEqual(sortedArray2, ['it_IT', 'en_GB', 'de_DE'], 'case 2');
+
+  });
+
+  test('languages are sorted as expected when languages have no countries', function () {
+    $('#dropdown').localizationTool();
+
+    var initialArray = ['de_DE', 'en_GB', 'eo', 'it_IT'];
+
+    var sortedArray = $('#dropdown').localizationTool('_sortCountryLanguagesByCountryName',
+        { 'de_DE' : { 'country' : 'Germany' },
+          'en_GB' : { 'country' : 'United Kingdom' },
+          'it_IT' : { 'country' : 'Italy' },
+          'eo' : { 'language' : 'Esperanto' } // a language with no country
+        },
+        initialArray
+    );
+
+    deepEqual(sortedArray, ['eo', 'de_DE', 'it_IT', 'en_GB'], 'eo comes first ');
+
+  });
 
   //////////////////////////////////////////////////////////////////////////////
   module('translate', { setup: function () {
@@ -705,7 +787,7 @@
     var htmlAfterTranslation = $('#dropdown .ltool-dropdown-label').html();
 
     notEqual(htmlAfterTranslation, htmlBeforeTranslation, 'the widget has actually changed its html');
-    equal(htmlAfterTranslation, '<div class="ltool-language-flag flag flag-it"></div><span class="ltool-language-country">Italy</span><span class="ltool-language-name">Italian</span>', 'got expected html');
+    equal(htmlAfterTranslation, '<div class="ltool-language-flag flag flag-it"></div><span class="ltool-language-country">Italy</span><span class="ltool-has-country ltool-language-name">Italian</span>', 'got expected html');
   });
 
   
