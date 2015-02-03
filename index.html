@@ -236,10 +236,10 @@
                            key,
                            ' - ',
                            languagesObj[key].country,
-                           ' (', languagesObj[key].language, ') ',
+                           languagesObj[key].hasOwnProperty('country') ? [' (', languagesObj[key].language, ') '].join('') : languagesObj[key].language,
                            '<div style="direction:',direction, ';" class="light">',
                            languagesObj[key].countryTranslated,
-                           ' (', languagesObj[key].languageTranslated, ') ',
+                           languagesObj[key].hasOwnProperty('country') ? [' (', languagesObj[key].languageTranslated, ') '].join('') : languagesObj[key].languageTranslated,
                            '</div>'
                        ].join(''));
                    }
