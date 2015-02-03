@@ -947,7 +947,7 @@
                         'class' : 'flag flag-fr'
                     }
                 },
-                'br_PT' : {
+                'pt_BR' : {
                     'country' : 'Brazil',
                     'language' : 'Portuguese',
                     'countryTranslated': 'Brasil',
