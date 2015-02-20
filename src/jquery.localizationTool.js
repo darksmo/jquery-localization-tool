@@ -1102,6 +1102,15 @@
                         'class': 'flag flag-dk'
                     }
                 },
+                'ro_RO': {
+                    'country' : 'Romania',
+                    'language' : 'Romanian',
+                    'countryTranslated': 'România',
+                    'languageTranslated': 'Român',
+                    'flag' : {
+                        'class': 'flag flag-ro'
+                    }
+                },
                 'eo' : {
                     // NOTE: no country
                     'language' : 'Esperanto',

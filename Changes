@@ -1,6 +1,7 @@
-Next Version
+v0.0.15 Fri Feb 20 22:15:07 CET 2015
     * add Danish
     * add Esperanto
+    * add Romanian
     * allow languages without a country
     * correct Brazilian Portuguese language code
 
