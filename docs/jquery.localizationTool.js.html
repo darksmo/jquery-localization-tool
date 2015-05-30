@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>JSDoc: Source: jquery.localizationTool.js</title>
-    
+
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
     <!--[if lt IE 9]>
@@ -16,16 +16,17 @@
 <body>
 
 <div id="main">
-    
+
     <h1 class="page-title">Source: jquery.localizationTool.js</h1>
+
     
-    
+
 
 
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>/**
+            <pre class="prettyprint source linenums"><code>/**
  * @fileOverview Contains the code for jQuery.localizationTool
  * 
  * @author Savio Dimatteo &lt;darksmo@gmail.com>
@@ -125,7 +126,7 @@
                 );
             }
 
-            if (settings.showCountry && haveCountry) {
+            if (settings.showCountry &amp;&amp; haveCountry) {
                 html.push(
                     ['&lt;span class="ltool-language-country">', languageDefinitionObj.country, '&lt;/span>'].join('')
                 );
@@ -457,7 +458,7 @@
                var $idNode = $('#' + idStringName);
                var contents = $idNode.contents();
 
-               if (settings.ignoreUnmatchedSelectors === true && contents.length === 0) {
+               if (settings.ignoreUnmatchedSelectors === true &amp;&amp; contents.length === 0) {
                    continue;
                }
 
@@ -505,7 +506,7 @@
                            var nodeId = $node.attr('id');
                     
                            // skip any node that was previously translated via an id
-                           if (typeof nodeId === 'string' && stringsObj.hasOwnProperty('id:' + nodeId)) {
+                           if (typeof nodeId === 'string' &amp;&amp; stringsObj.hasOwnProperty('id:' + nodeId)) {
                                continue NODE;
                            }
                        }
@@ -521,7 +522,7 @@
                                    j = 0;
 
                                for(;nodeClass = nodeClassArray[j++];) {
-                                   if (typeof nodeClass === 'string' && stringsObj.hasOwnProperty('class:' + nodeClass)) {
+                                   if (typeof nodeClass === 'string' &amp;&amp; stringsObj.hasOwnProperty('class:' + nodeClass)) {
                                        continue NODE;
                                    }
                                }
@@ -665,7 +666,7 @@
               var k, parentNode;
               for (k=0; parentNode = allParentNodes[k++];) {
                   var nodeContents = $(parentNode).contents();
-                  if (nodeContents.length === 1 &&
+                  if (nodeContents.length === 1 &amp;&amp;
                       nodeContents[0].nodeType === 3) {
 
                       textNodesToAdd.push($(parentNode));
@@ -842,7 +843,7 @@
          */
         '_sortCountryLanguagesByCountryName': function (languagesDefinition, arrayOfCountryLanguageCodes) {
             return arrayOfCountryLanguageCodes.sort(function (a, b) {
-                if (languagesDefinition[a].hasOwnProperty('country') && languagesDefinition[b].hasOwnProperty('country')) {
+                if (languagesDefinition[a].hasOwnProperty('country') &amp;&amp; languagesDefinition[b].hasOwnProperty('country')) {
                     return languagesDefinition[a].country.localeCompare(
                         languagesDefinition[b].country
                     );
@@ -903,7 +904,7 @@
                 languageCode;
 
             for (languageCode in usedLanguagesHistogram) {
-                if (usedLanguagesHistogram.hasOwnProperty(languageCode) &&
+                if (usedLanguagesHistogram.hasOwnProperty(languageCode) &amp;&amp;
                     usedLanguagesHistogram[languageCode] === howManyDifferentStrings
                 ) {
 
@@ -972,6 +973,15 @@
                     'languageTranslated' : 'Français',
                     'flag' : {
                         'class' : 'flag flag-fr'
+                    }
+                },
+                'ko_KR' : {
+                    'country' : 'Korea, Republic of.',
+                    'language' : 'Korean',
+                    'countryTranslated' : '대한민국',
+                    'languageTranslated' : '한국어',
+                    'flag' : {
+                        'class' : 'flag flag-kr'
                     }
                 },
                 'pt_BR' : {
@@ -1270,13 +1280,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#_bindEvents">_bindEvents</a></li><li><a href="global.html#_buildStringReferenceMapping">_buildStringReferenceMapping</a></li><li><a href="global.html#_decomposeStringsForReferenceMapping">_decomposeStringsForReferenceMapping</a></li><li><a href="global.html#_findSubsetOfUsedLanguages">_findSubsetOfUsedLanguages</a></li><li><a href="global.html#_initializeWidget">_initializeWidget</a></li><li><a href="global.html#_languageCodeToHtml">_languageCodeToHtml</a></li><li><a href="global.html#_languageCodeToOrdinal">_languageCodeToOrdinal</a></li><li><a href="global.html#_mayTranslate">_mayTranslate</a></li><li><a href="global.html#_onDropdownClicked">_onDropdownClicked</a></li><li><a href="global.html#_onKeydown">_onKeydown</a></li><li><a href="global.html#_onLanguageSelected">_onLanguageSelected</a></li><li><a href="global.html#_onMouseout">_onMouseout</a></li><li><a href="global.html#_ordinalToLanguageCode">_ordinalToLanguageCode</a></li><li><a href="global.html#_selectLanguage">_selectLanguage</a></li><li><a href="global.html#_selectPreviousLanguage">_selectPreviousLanguage</a></li><li><a href="global.html#_sortCountryLanguagesByCountryName">_sortCountryLanguagesByCountryName</a></li><li><a href="global.html#destroy">destroy</a></li><li><a href="global.html#getSelectedLanguageCode">getSelectedLanguageCode</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#translate">translate</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#_bindEvents">_bindEvents</a></li><li><a href="global.html#_buildStringReferenceMapping">_buildStringReferenceMapping</a></li><li><a href="global.html#_decomposeStringsForReferenceMapping">_decomposeStringsForReferenceMapping</a></li><li><a href="global.html#_findSubsetOfUsedLanguages">_findSubsetOfUsedLanguages</a></li><li><a href="global.html#_initializeWidget">_initializeWidget</a></li><li><a href="global.html#_languageCodeToHtml">_languageCodeToHtml</a></li><li><a href="global.html#_languageCodeToOrdinal">_languageCodeToOrdinal</a></li><li><a href="global.html#_mayTranslate">_mayTranslate</a></li><li><a href="global.html#_onDropdownClicked">_onDropdownClicked</a></li><li><a href="global.html#_onKeydown">_onKeydown</a></li><li><a href="global.html#_onLanguageSelected">_onLanguageSelected</a></li><li><a href="global.html#_onMouseout">_onMouseout</a></li><li><a href="global.html#_ordinalToLanguageCode">_ordinalToLanguageCode</a></li><li><a href="global.html#_selectLanguage">_selectLanguage</a></li><li><a href="global.html#_selectPreviousLanguage">_selectPreviousLanguage</a></li><li><a href="global.html#_sortCountryLanguagesByCountryName">_sortCountryLanguagesByCountryName</a></li><li><a href="global.html#destroy">destroy</a></li><li><a href="global.html#getSelectedLanguageCode">getSelectedLanguageCode</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#translate">translate</a></li></ul>
 </nav>
 
-<br clear="both">
+<br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Feb 20 2015 22:16:42 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0</a> on Sat May 30 2015 03:54:10 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>

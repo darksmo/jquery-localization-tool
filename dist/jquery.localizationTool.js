@@ -1,4 +1,4 @@
-/*! Localization Tool - v0.0.15 - 2015-02-20
+/*! Localization Tool - v0.0.15 - 2015-05-30
 * http://darksmo.github.io/jquery-localization-tool/
 * Copyright (c) 2015; Licensed MIT */
 (function($) {
@@ -942,6 +942,15 @@
                     'languageTranslated' : 'Français',
                     'flag' : {
                         'class' : 'flag flag-fr'
+                    }
+                },
+                'ko_KR' : {
+                    'country' : 'Korea, Republic of.',
+                    'language' : 'Korean',
+                    'countryTranslated' : '대한민국',
+                    'languageTranslated' : '한국어',
+                    'flag' : {
+                        'class' : 'flag flag-kr'
                     }
                 },
                 'pt_BR' : {
