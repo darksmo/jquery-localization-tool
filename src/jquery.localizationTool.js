@@ -947,6 +947,15 @@
                         'class' : 'flag flag-fr'
                     }
                 },
+                'ko_KR' : {
+                    'country' : 'Korea, Republic of.',
+                    'language' : 'Korean',
+                    'countryTranslated' : '대한민국',
+                    'languageTranslated' : '한국어',
+                    'flag' : {
+                        'class' : 'flag flag-kr'
+                    }
+                },
                 'pt_BR' : {
                     'country' : 'Brazil',
                     'language' : 'Portuguese',
