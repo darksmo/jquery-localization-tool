@@ -1,4 +1,4 @@
-/*! Localization Tool - v0.0.16 - 2015-05-31
+/*! Localization Tool - v0.0.17 - 2015-07-19
 * http://darksmo.github.io/jquery-localization-tool/
 * Copyright (c) 2015; Licensed MIT */
 (function($) {
@@ -1028,11 +1028,20 @@
                 },
                 'zh_CN': {
                     'country' : 'China',
-                    'language' : 'Chinese',
+                    'language' : 'Simplified Chinese',
                     'countryTranslated': '中国',
-                    'languageTranslated': '中文',
+                    'languageTranslated': '简体中文',
                     'flag' : {
                         'class' : 'flag flag-cn'
+                    }
+                },
+                'zh_TW': {
+                    'country' : 'Taiwan',
+                    'language' : 'Traditional Chinese',
+                    'countryTranslated': '臺灣',
+                    'languageTranslated': '繁體中文',
+                    'flag' : {
+                        'class' : 'flag flag-tw'
                     }
                 },
                 'fi_FI': {

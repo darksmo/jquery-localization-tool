@@ -1,3 +1,7 @@
+v0.0.17 Sun Jul 19 20:25:23 CEST 2015
+    * fix Chinese -> China/Simplified Chinese
+    * add Traditional Chinese/Taiwan
+
 v0.0.16 Sun May 31 18:57:17 CEST 2015
     * add Korean
 
