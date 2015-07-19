@@ -1038,6 +1038,15 @@
                         'class' : 'flag flag-cn'
                     }
                 },
+                'zh_TW': {
+                    'country' : 'Taiwan',
+                    'language' : 'Traditional Chinese',
+                    'countryTranslated': '臺灣',
+                    'languageTranslated': '繁體中文',
+                    'flag' : {
+                        'class' : 'flag flag-tw'
+                    }
+                },
                 'fi_FI': {
                     'country' : 'Finland',
                     'language' : 'Finnish',
