@@ -1031,9 +1031,9 @@
                 },
                 'zh_CN': {
                     'country' : 'China',
-                    'language' : 'Chinese',
+                    'language' : 'Simplified Chinese',
                     'countryTranslated': '中国',
-                    'languageTranslated': '中文',
+                    'languageTranslated': '简体中文',
                     'flag' : {
                         'class' : 'flag flag-cn'
                     }
