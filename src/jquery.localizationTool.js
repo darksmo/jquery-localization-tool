@@ -1092,6 +1092,15 @@
                         'class': 'flag flag-in'
                     }
                 },
+                'ta_IN': {
+                    'country' : 'India',
+                    'language': 'Tamil',
+                    'countryTranslated': 'இந்தியா',
+                    'languageTranslated': 'தமிழ்',
+                    'flag': {
+                        'class': 'flag flag-in'
+                    }
+                },
                 'tr_TR': {
                     'country' : 'Turkey',
                     'language' : 'Turkish',
