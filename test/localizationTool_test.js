@@ -787,7 +787,7 @@
     var htmlAfterTranslation = $('#dropdown .ltool-dropdown-label').html();
 
     notEqual(htmlAfterTranslation, htmlBeforeTranslation, 'the widget has actually changed its html');
-    equal(htmlAfterTranslation, '<div class="ltool-language-flag flag flag-it"></div><span class="ltool-language-country">Italy</span><span class="ltool-has-country ltool-language-name">Italian</span>', 'got expected html');
+    equal(htmlAfterTranslation, "<div class=\"ltool-language-flag flag flag-it\"></div><span class=\"ltool-language-countryname\"><span class=\"ltool-language-country\">Italy</span> <span class=\"ltool-has-country ltool-language-name\">(Italian)</span></span>", 'got expected html');
   });
 
   
@@ -929,6 +929,64 @@
     });
   });
 
+  module('_interpolateTemplate', { setup: function () {
+    addDropdownWidgetFunc();
+  }});
+
+  [
+    {
+        template: '{{country}}{{language}}',
+        country: 'Italy',
+        language: 'Italian',
+        expected: "<span class=\"ltool-language-countryname\"><span class=\"ltool-language-country\">Italy</span><span class=\"ltool-has-country ltool-language-name\">Italian</span></span>"
+    },
+    {
+        template: '{{country}}',
+        country: 'Italy',
+        language: 'Italian',
+        expected: "<span class=\"ltool-language-countryname\"><span class=\"ltool-language-country\">Italy</span></span>" 
+    },
+    {
+        template: '{{language}}',
+        country: 'Italy',
+        language: 'Italian',
+        expected: "<span class=\"ltool-language-countryname\"><span class=\"ltool-has-country ltool-language-name\">Italian</span></span>" 
+    },
+    {
+        template: 'FIXED TEXT',
+        country: 'Italy',
+        language: 'Italian',
+        expected: "<span class=\"ltool-language-countryname\">FIXED TEXT</span>" 
+    },
+    {
+        template: '{{language}}{{country}}{{language}}',
+        country: 'IT',
+        language: 'italian',
+        expected: "<span class=\"ltool-language-countryname\"><span class=\"ltool-has-country ltool-language-name\">italian</span><span class=\"ltool-language-country\">IT</span><span class=\"ltool-has-country ltool-language-name\">italian</span></span>"
+    },
+    {
+        template: '{{country}}-{{language}}',
+        country: '$1Italy$2',
+        language: '$1Italian$2',
+        expected: "<span class=\"ltool-language-countryname\"><span class=\"ltool-language-country\">&#36;1Italy&#36;2</span>-<span class=\"ltool-has-country ltool-language-name\">&#36;1Italian&#36;2</span></span>"
+    },
+    {
+        template: '{{(country)}}{{$%^language}}',
+        country: 'Italy',
+        language: 'Italian',
+        expected: "<span class=\"ltool-language-countryname\"><span class=\"ltool-language-country\">(Italy)</span><span class=\"ltool-has-country ltool-language-name\">$%^Italian</span></span>"
+    }
+  ].forEach(function (oFixture) {
+      test('returns expected markup for ' + oFixture.template, function () {
+        var $dropdown = $('#dropdown').localizationTool({
+            labelTemplate: oFixture.template
+        });
+
+        var interpolated = $dropdown.localizationTool('_interpolateTemplate', oFixture.country, oFixture.language);
+
+        strictEqual(interpolated, oFixture.expected, 'got expected string');
+      });
+  });
 
 
 

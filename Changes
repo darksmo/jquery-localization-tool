@@ -1,3 +1,6 @@
+v0.0.19 Mon Oct  5 03:27:50 CEST 2015
+    * add labelTemplate option to define custom labels for languages and countries
+
 v0.0.18 Wed Sep 30 21:43:27 CEST 2015
     * add Tamil, India
 

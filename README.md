@@ -64,6 +64,7 @@ showLanguage | boolean | true | whether to show the language name on the widget
 showCountry | boolean | true | whether to show the country name on the widget
 onLanguageSelected | function | `function (/*langCountryCode*/) { return true; }` | a callback called as soon as the user selects the new language from the dropdown menu. Return true to trigger the translation or false to just select the language without translating.
 ignoreUnmatchedSelectors | boolean | false | do not throw error if a provided selector doesn't match the html markup
+labelTemplate | string | `{{country}} {{(language)}}` | a template string to interpolate with actual values for language and country. The `{{language}}` and `{{country}}` tokens will be replaced if present in the template string. Also it's possible to add prefixes/suffixes inside the curly braces, as the paretheses in the default value.
 
 #### Methods
 

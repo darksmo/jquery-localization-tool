@@ -79,7 +79,7 @@
                 htmlImage = '<img src="' + languageDefinitionObj.flag.url + '" />';
             }
 
-            var languageName    = languageDefinitionObj.language;
+            var languageName = languageDefinitionObj.language;
             var haveCountry = languageDefinitionObj.hasOwnProperty('country');
 
             /*
@@ -98,21 +98,56 @@
                 );
             }
 
-            if (settings.showCountry && haveCountry) {
-                html.push(
-                    ['<span class="ltool-language-country">', languageDefinitionObj.country, '</span>'].join('')
-                );
-            }
-            if (settings.showLanguage) {
-                var hasCountryClass = haveCountry ? 'ltool-has-country ' : "";
-                
-                html.push(
-                    ['<span class="', hasCountryClass, 'ltool-language-name">', languageName ,'</span>'].join('')
-                );
-            }
+            var interpolatedTemplate = methods._interpolateTemplate.call($this,
+                haveCountry ? languageDefinitionObj.country : undefined,
+                languageName
+            );
+            html.push(interpolatedTemplate);
             html.push('</li>');
 
             return html.join('');
+        },
+        /**
+         * Interpolates the given country name and language name to the
+         * labelTemplate specified in the settings.
+         *
+         * @param {string} countryName
+         *   the country name
+         * @param {string} languageName
+         *   the language name
+         *
+         * @returns {string}
+         *   the interpolated template
+         */
+        _interpolateTemplate: function (countryName, languageName) {
+            var $this = this,
+                settings = $this.data('settings'),
+                template = settings.labelTemplate,
+                countryReplacement = '',
+                languageReplacement = '',
+                haveCountry = typeof countryName === 'string';
+
+            if (settings.showCountry && haveCountry) {
+                countryReplacement = [
+                    '<span class="ltool-language-country">',
+                    '$1' + countryName.replace(/[$]/g, '&#36;') + '$2',
+                    '</span>'
+                ].join('');
+            }
+            if (settings.showLanguage) {
+                var hasCountryClass = haveCountry ? 'ltool-has-country ' : "";
+                languageReplacement = [
+                    '<span class="', hasCountryClass, 'ltool-language-name">',
+                    '$1' + languageName.replace(/[$]/g, '&#36;') + '$2' ,
+                    '</span>'
+                ].join('');
+            }
+
+            return '<span class="ltool-language-countryname">' + 
+                    template
+                        .replace(/{{([^{]*)language([^}]*)}}/g, languageReplacement)
+                        .replace(/{{([^{]*)country([^}]*)}}/g, countryReplacement) +
+                '</span>';
         },
         /**
          * Displays the given language in the dropdown menu.
@@ -1158,6 +1193,8 @@
                 'showLanguage': true,
                 /* show the country on the widget */
                 'showCountry': true,
+                /* format of the language/country label */
+                'labelTemplate': '{{country}} {{(language)}}',
                 'languages' : {
                     /*
                      * The format here is <country code>_<language code>.

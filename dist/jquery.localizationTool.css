@@ -841,20 +841,13 @@
 .localizationTool .ltool-language-name {
   color: #8dc1e2;
 }
-.localizationTool .ltool-language-name.ltool-has-country:before {
-  content: '(';
-}
-.localizationTool .ltool-language-name.ltool-has-country:after {
-  content: ')';
-}
 .localizationTool .ltool-language-flag {
   display: block;
   float: left;
   margin-top: 3px;
 }
 .localizationTool .ltool-language-flag,
-.localizationTool .ltool-language-country,
-.localizationTool .ltool-language-name {
+.localizationTool .ltool-language-countryname {
   margin-left: 8px;
 }
 .localizationTool ul {
