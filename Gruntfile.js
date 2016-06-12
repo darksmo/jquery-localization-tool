@@ -159,7 +159,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', 'build:dev');
 
   // Build dev task
-  grunt.registerTask('build:dev', ['jshint', 'clean', 'concat', 'uglify', 'less', 'cssmin', 'copy', 'jsdoc']);
+  grunt.registerTask('build:dev', ['jshint', 'clean', 'concat', 'uglify', 'less', 'cssmin', 'copy', 'jsdoc', 'test']);
 
   // Test task
   grunt.registerTask('test', ['connect', 'jshint', 'qunit']);
