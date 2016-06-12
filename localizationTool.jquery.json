@@ -2,7 +2,7 @@
   "name": "localizationTool",
   "title": "Localization Tool",
   "description": "Simple localization tool for your website. Translates strings in the languages you provide.",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "homepage": "http://darksmo.github.io/jquery-localization-tool/",
   "demo": "http://darksmo.github.io/jquery-localization-tool/",
   "author": {

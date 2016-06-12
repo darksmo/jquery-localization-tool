@@ -1,6 +1,6 @@
-/*! Localization Tool - v0.0.19 - 2015-10-05
+/*! Localization Tool - v0.0.20 - 2016-06-12
 * http://darksmo.github.io/jquery-localization-tool/
-* Copyright (c) 2015; Licensed MIT */
+* Copyright (c) 2016; Licensed MIT */
 (function($) {
     var _keyboardPressed = false;
 
@@ -1129,6 +1129,15 @@
                     'language': 'Tamil',
                     'countryTranslated': 'இந்தியா',
                     'languageTranslated': 'தமிழ்',
+                    'flag': {
+                        'class': 'flag flag-in'
+                    }
+                },
+                'ml_IN': {
+                    'country' : 'India',
+                    'language': 'Malayalam',
+                    'countryTranslated': 'ഇന്ത്യ',
+                    'languageTranslated': 'മലയാളം',
                     'flag': {
                         'class': 'flag flag-in'
                     }
