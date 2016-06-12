@@ -1136,6 +1136,15 @@
                         'class': 'flag flag-in'
                     }
                 },
+                'ml_IN': {
+                    'country' : 'India',
+                    'language': 'Malayalam',
+                    'countryTranslated': 'ഇന്ത്യ',
+                    'languageTranslated': 'മലയാളം',
+                    'flag': {
+                        'class': 'flag flag-in'
+                    }
+                },
                 'tr_TR': {
                     'country' : 'Turkey',
                     'language' : 'Turkish',
