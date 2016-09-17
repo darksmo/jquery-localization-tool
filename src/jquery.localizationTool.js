@@ -1046,6 +1046,15 @@
                         'class' : 'flag flag-tn'
                     }
                 },
+                'el_GR' : {
+                    'country': 'Greece',
+                    'language': 'Greek',
+                    'countryTranslated': 'Ελλάδα',
+                    'languageTranslated' : 'Ελληνικά',
+                    'flag' : {
+                        'class' : 'flag flag-gr'
+                    }
+                },
                 'en_IE' : {
                     'country': 'Ireland',
                     'language': 'English',
