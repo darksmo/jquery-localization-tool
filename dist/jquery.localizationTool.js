@@ -1,4 +1,4 @@
-/*! Localization Tool - v0.0.20 - 2016-06-12
+/*! Localization Tool - v0.0.21 - 2016-09-18
 * http://darksmo.github.io/jquery-localization-tool/
 * Copyright (c) 2016; Licensed MIT */
 (function($) {
@@ -1041,6 +1041,15 @@
                     'cssDirection': 'rtl',
                     'flag' : {
                         'class' : 'flag flag-tn'
+                    }
+                },
+                'el_GR' : {
+                    'country': 'Greece',
+                    'language': 'Greek',
+                    'countryTranslated': 'Ελλάδα',
+                    'languageTranslated' : 'Ελληνικά',
+                    'flag' : {
+                        'class' : 'flag flag-gr'
                     }
                 },
                 'en_IE' : {
