@@ -1207,6 +1207,15 @@
                     'flag' : {
                         'class': 'flag flag-sk'
                     }
+                },
+                'es_MX' : {
+                    'country' : 'Mexico',
+                    'language' : 'Spanish',
+                    'countryTranslated': 'México',
+                    'languageTranslated': 'Español',
+                    'flag' : {
+                        'class': 'flag flag-mx'
+                    }
                 }
             };
 
