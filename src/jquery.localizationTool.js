@@ -1,6 +1,6 @@
 /**
  * @fileOverview Contains the code for jQuery.localizationTool
- * 
+ *
  * @author Savio Dimatteo <darksmo@gmail.com>
  */
 
@@ -1197,6 +1197,15 @@
                     'languageTranslated' : 'Esperanto',
                     'flag' : {
                         'class': 'flag flag-esperanto'
+                    }
+                },
+                'sk_SK' : {
+                    'country' : 'Slovakia',
+                    'language' : 'Slovak',
+                    'countryTranslated': 'Slovensko',
+                    'languageTranslated': 'Slovenčina',
+                    'flag' : {
+                        'class': 'flag flag-sk'
                     }
                 }
             };
