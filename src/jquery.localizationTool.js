@@ -1216,6 +1216,15 @@
                     'flag' : {
                         'class': 'flag flag-mx'
                     }
+                },
+                'tl_PH' : {
+                    'country' : 'Philippines',
+                    'language' : 'Tagalog',
+                    'countryTranslated': 'Pilipinas',
+                    'languageTranslated': 'Tagalog',
+                    'flag' : {
+                        'class': 'flag flag-ph'
+                    }
                 }
             };
 
