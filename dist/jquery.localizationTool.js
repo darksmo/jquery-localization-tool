@@ -1,6 +1,6 @@
-/*! Localization Tool - v0.0.21 - 2016-09-18
+/*! Localization Tool - v0.0.22 - 2017-01-29
 * http://darksmo.github.io/jquery-localization-tool/
-* Copyright (c) 2016; Licensed MIT */
+* Copyright (c) 2017; Licensed MIT */
 (function($) {
     var _keyboardPressed = false;
 
@@ -140,7 +140,7 @@
                 ].join('');
             }
 
-            return '<span class="ltool-language-countryname">' + 
+            return '<span class="ltool-language-countryname">' +
                     template
                         .replace(/{{([^{]*)language([^}]*)}}/g, languageReplacement)
                         .replace(/{{([^{]*)country([^}]*)}}/g, countryReplacement) +
@@ -174,7 +174,7 @@
             var $this = this,
                 settings = $this.data('settings'),
                 languagesObj = settings.languages;
-            
+
             var markupArray = [];
 
             markupArray.push('<span tabindex="0" class="ltool-dropdown-label">Change Language</span><div class="ltool-dropdown-label-arrow"></div>');
@@ -359,14 +359,14 @@
                     _keyboardPressed = false;
                     methods._onKeydown.call($this, e);
                 })
-                .bind('click.localizationTool', function (e) { 
+                .bind('click.localizationTool', function (e) {
                     methods._onDropdownClicked.call($this, e);
                 })
-                .bind('keydown.localizationTool', function (e){ 
+                .bind('keydown.localizationTool', function (e){
                     _keyboardPressed = true;
                     methods._onKeydown.call($this, e);
                 })
-                .bind('mouseout.localizationTool', function (e) { 
+                .bind('mouseout.localizationTool', function (e) {
                     methods._onMouseout.call($this, e);
                 })
                 .bind('focusout.localizationTool', function () {
@@ -412,7 +412,7 @@
                 if (stringsObj.hasOwnProperty(stringKey)) {
                     if (stringKey.match(attrRegexp)) {   // NOTE: check first!
                         decompositionObj.attributeStrings.push(stringKey);
-                    } 
+                    }
                     else if (stringKey.indexOf('id:') === 0) {
                         decompositionObj.idStrings.push(stringKey);
                     }
@@ -432,8 +432,8 @@
         },
         /**
          * Goes through each text node and builds a string reference mapping.
-         * It is a mapping (an object) 
-         * STRING_IDENTIFIER -> <IS_ATTRIBUTE?, ORIGINAL_HTML, [DOM_NODES]> 
+         * It is a mapping (an object)
+         * STRING_IDENTIFIER -> <IS_ATTRIBUTE?, ORIGINAL_HTML, [DOM_NODES]>
          * used later for the translation. See init method for a
          * reference. The resulting object is stored internally in
          * $this.data('refMappingObj') as refMapping.
@@ -490,7 +490,7 @@
                var string;
                var decompositionKeyPrefix = prefix.replace(':','');
                for (i=0; string = decompositionObj[decompositionKeyPrefix + 'Strings'][i++];) {
-                   
+
                    var stringName = string.substring(prefix.length);
 
                    // keeps the text of the first dom node in the loop below
@@ -499,8 +499,8 @@
                    var allNodeTextsAreEqual = true;
                    domNodeText = undefined;  // note: assigns undefined
 
-                   
-                   var k=0, node; 
+
+                   var k=0, node;
                    NODE:
                    for (; node = $(jqueryPrefix + stringName)[k++];) {
 
@@ -508,7 +508,7 @@
 
                        if (checkForIds) {
                            var nodeId = $node.attr('id');
-                    
+
                            // skip any node that was previously translated via an id
                            if (typeof nodeId === 'string' && stringsObj.hasOwnProperty('id:' + nodeId)) {
                                continue NODE;
@@ -772,7 +772,7 @@
                             $domNode.attr(attributeName, translation);
                             $domNode.css('direction', cssDirection);
                         }
-                        
+
                     }
                     else {
                         // all other cases
@@ -816,7 +816,7 @@
             $this.removeData();
 
             // unbind events
-            $this.unbind('click.localizationTool', function (e) { 
+            $this.unbind('click.localizationTool', function (e) {
                 methods._onDropdownClicked.call($this, e);
             });
             $this.find('.ltool-language')
@@ -825,7 +825,7 @@
                 });
 
             $this
-                .unbind('mouseout.localizationTool', function (e) { 
+                .unbind('mouseout.localizationTool', function (e) {
                     methods._onMouseout.call($this, e);
                 });
 
@@ -884,7 +884,7 @@
             var usedLanguagesHistogram = {};
             var howManyDifferentStrings = 0;
 
-            for (string in stringsObj) { 
+            for (string in stringsObj) {
                 if (stringsObj.hasOwnProperty(string)) {
 
                     var languages = stringsObj[string],
@@ -1194,6 +1194,33 @@
                     'languageTranslated' : 'Esperanto',
                     'flag' : {
                         'class': 'flag flag-esperanto'
+                    }
+                },
+                'sk_SK' : {
+                    'country' : 'Slovakia',
+                    'language' : 'Slovak',
+                    'countryTranslated': 'Slovensko',
+                    'languageTranslated': 'Slovenčina',
+                    'flag' : {
+                        'class': 'flag flag-sk'
+                    }
+                },
+                'es_MX' : {
+                    'country' : 'Mexico',
+                    'language' : 'Spanish',
+                    'countryTranslated': 'México',
+                    'languageTranslated': 'Español',
+                    'flag' : {
+                        'class': 'flag flag-mx'
+                    }
+                },
+                'tl_PH' : {
+                    'country' : 'Philippines',
+                    'language' : 'Tagalog',
+                    'countryTranslated': 'Pilipinas',
+                    'languageTranslated': 'Tagalog',
+                    'flag' : {
+                        'class': 'flag flag-ph'
                     }
                 }
             };
