@@ -1225,6 +1225,15 @@
                     'flag' : {
                         'class': 'flag flag-ph'
                     }
+                },
+                'cs_CZ' : {
+                    'country' : 'Czech Republic',
+                    'language' : 'Czech',
+                    'countryTranslated': 'Česká republika',
+                    'languageTranslated': 'Čeština',
+                    'flag' : {
+                        'class': 'flag flag-cz'
+                    }
                 }
             };
 
