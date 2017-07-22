@@ -1,4 +1,4 @@
-/*! Localization Tool - v0.0.22 - 2017-01-29
+/*! Localization Tool - v0.0.22 - 2017-07-22
 * http://darksmo.github.io/jquery-localization-tool/
 * Copyright (c) 2017; Licensed MIT */
 (function($) {
@@ -1221,6 +1221,15 @@
                     'languageTranslated': 'Tagalog',
                     'flag' : {
                         'class': 'flag flag-ph'
+                    }
+                },
+                'cs_CZ' : {
+                    'country' : 'Czech Republic',
+                    'language' : 'Czech',
+                    'countryTranslated': 'Česká republika',
+                    'languageTranslated': 'Čeština',
+                    'flag' : {
+                        'class': 'flag flag-cz'
                     }
                 }
             };
