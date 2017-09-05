@@ -1024,4 +1024,81 @@
     }, 'out of left bound of array');
   });
 
+
+  //////////////////////////////////////////////////////////////////////////////
+  Q.module('translateString', { beforeEach: function () {
+    addDropdownWidgetFunc();
+  }});
+  Q.test('translates a string with provided translation', function (assert) {
+    var $dropdown = $('#dropdown').localizationTool({
+        strings: {
+            'this is some text' : {
+               'it_IT' : 'this is some translation 1',
+               'jp_JP' : 'this is some translation 2',
+               'fr_FR' : 'this is some translation 3'
+            }
+        }
+    });
+
+    assert.equal($dropdown.localizationTool('translateString',
+        'this is some text',
+        'it_IT'
+    ), 'this is some translation 1', 'got the expected string');
+
+  });
+
+  Q.test('throws an error when translation is made on an unknown language', function (assert) {
+    var $dropdown = $('#dropdown').localizationTool({
+        strings: {
+            'this is some text' : {
+               'it_IT' : 'this is some translation 1',
+               'jp_JP' : 'this is some translation 2',
+               'fr_FR' : 'this is some translation 3'
+            }
+        }
+    });
+    assert.throws(function () {
+        $dropdown.localizationTool('translateString',
+            'this is some text',
+            'fooLanguage'  // this language is not knwon
+        );
+    }, /The language code fooLanguage is not known/);
+  });
+
+  Q.test('throws an error when translation is not defined for the given language', function (assert) {
+    var $dropdown = $('#dropdown').localizationTool({
+        strings: {
+            'this is some text' : {
+               'it_IT' : 'this is some translation 1',
+               'jp_JP' : 'this is some translation 2',
+               'fr_FR' : 'this is some translation 3'
+            }
+        }
+    });
+    assert.throws(function () {
+        $dropdown.localizationTool('translateString',
+            'this is some text',
+            'de_DE'
+        );
+    }, /A translation for the string 'this is some text' was not defined for language de_DE. Defined languages are: it_IT, jp_JP, fr_FR$/);
+  });
+
+  Q.test('throws an error when string is not translated in any language', function (assert) {
+    var $dropdown = $('#dropdown').localizationTool({
+        strings: {
+            'this is some text' : {
+               'it_IT' : 'this is some translation 1',
+               'jp_JP' : 'this is some translation 2',
+               'fr_FR' : 'this is some translation 3'
+            }
+        }
+    });
+    assert.throws(function () {
+        $dropdown.localizationTool('translateString',
+            'this is some other text',
+            'de_DE'  // this language is not knwon
+        );
+    }, /The string 'this is some other text' was not translated in any language./);
+  });
+
 }(jQuery));

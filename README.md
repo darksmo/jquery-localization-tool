@@ -70,7 +70,8 @@ labelTemplate | string | `{{country}} {{(language)}}` | a template string to int
 
 Method | Argument | Description
 ------ | -------- | -----------
-translate | string (languageCode) | translates the text in the given language programmatically, if no language code is specified, the default (initial) translation is used.
+translateString | string (textToTranslate), string (languageCode) | translates the given textToTranslate in the given languageCode. Note, this method just translates without creating side effects, returning the translated string. |
+translate | string (languageCode) | translates the text in the DOM to the given language programmatically, if no language code is specified, the default (initial) translation is used.
 destroy | None | destroys the localization tool
 
 #### JSDoc
