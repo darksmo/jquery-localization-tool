@@ -1,3 +1,7 @@
+v0.0.24 Tue Sep  5 23:54:50 CEST 2017
+    * Update version of Qunit
+    * add new method translateString to translate text programmatically
+
 v0.0.23 Sat Jul 22 18:39:46 CEST 2017
     * Add Czech Republic/Czech
 

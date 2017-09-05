@@ -1,4 +1,4 @@
-/*! Localization Tool - v0.0.22 - 2017-07-22
+/*! Localization Tool - v0.0.22 - 2017-09-06
 * http://darksmo.github.io/jquery-localization-tool/
 * Copyright (c) 2017; Licensed MIT */
 (function($) {
@@ -801,6 +801,42 @@
             methods._selectLanguage.call($this, languageCode);
 
             return $this;
+        },
+        /**
+         * Translates a given string.
+         *
+         * @param {string} textToTranslate
+         *  A string of text to be translated. Requires the string is defined
+         *  during plugin initialization.
+         * @param {string} languageCode
+         *  A known language code like 'de_DE'
+         *
+         * @returns {string}
+         *  The translated string. The method throws an error if it was not
+         *  possible to translate the string.
+         */
+        'translateString' : function (textToTranslate, languageCode) {
+            var $this = this;
+            var settings = $this.data('settings');
+            var stringsObj = settings.strings;
+
+            if (!settings.languages.hasOwnProperty(languageCode)) {
+                $.error('The language code ' + languageCode + ' is not known');
+                return;
+            }
+
+            if (!stringsObj.hasOwnProperty(textToTranslate)) {
+                $.error('The string \'' + textToTranslate + '\' was not translated in any language.');
+                return;
+            }
+
+            var oTranslations = stringsObj[textToTranslate] || {};
+            if (!oTranslations.hasOwnProperty(languageCode)) {
+                $.error('A translation for the string \'' + textToTranslate + '\' was not defined for language ' + languageCode + ". Defined languages are: " + Object.keys(oTranslations).join(", "));
+                return;
+            }
+
+            return oTranslations[languageCode];
         },
         /**
          * Destroys the dropdown widget.
